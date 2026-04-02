@@ -153,8 +153,7 @@ export default function AdminDashboard() {
             <li>• Use descriptive titles and metadata for better search visibility</li>
           </ul>
         </div>
-        </CardContent>
-      </Card>
-    </div>
+      </div>
+    </main>
   )
 }

@@ -110,7 +110,7 @@ export default function DestinationsPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Manage Destinations</h1>
+        <h1 className="text-3xl font-bold text-dust">Manage Destinations</h1>
         <Button
           onClick={() => setShowForm(!showForm)}
           className="bg-amber-600 hover:bg-amber-700 text-white"
@@ -167,7 +167,7 @@ export default function DestinationsPage() {
                 setEditingId(null)
                 setFormData({ name: '', country: '', description: '', image_url: '', best_season: '' })
               }}
-              className="bg-gray-400 hover:bg-gray-500 text-white"
+              className="bg-clay hover:bg-ochre text-dusk"
             >
               Cancel
             </Button>
@@ -180,8 +180,8 @@ export default function DestinationsPage() {
           <div key={destination.id} className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center">
             <div>
               <h3 className="font-bold text-lg">{destination.name}</h3>
-              <p className="text-gray-600">{destination.country}</p>
-              <p className="text-sm text-gray-500">{destination.best_season}</p>
+              <p className="text-sand">{destination.country}</p>
+              <p className="text-sm text-sage">{destination.best_season}</p>
             </div>
             <div className="flex gap-2">
               <Button

@@ -114,7 +114,7 @@ export default function GalleryPage() {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-gray-800">Manage Gallery</h1>
+        <h1 className="text-3xl font-bold text-dust">Manage Gallery</h1>
         <Button
           onClick={() => setShowForm(!showForm)}
           className="bg-amber-600 hover:bg-amber-700 text-white"
@@ -177,7 +177,7 @@ export default function GalleryPage() {
                   destination: '',
                 })
               }}
-              className="bg-gray-400 hover:bg-gray-500 text-white"
+              className="bg-clay hover:bg-ochre text-dusk"
             >
               Cancel
             </Button>
@@ -191,9 +191,9 @@ export default function GalleryPage() {
             <img src={item.image_url} alt={item.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="font-bold text-lg mb-1">{item.title}</h3>
-              <p className="text-sm text-gray-600 mb-2">{item.category}</p>
-              <p className="text-xs text-gray-500 mb-3">{item.destination}</p>
-              <p className="text-sm text-gray-600 mb-4">{item.description}</p>
+              <p className="text-sm text-sand mb-2">{item.category}</p>
+              <p className="text-xs text-sage mb-3">{item.destination}</p>
+              <p className="text-sm text-sand mb-4">{item.description}</p>
               <div className="flex gap-2">
                 <Button
                   onClick={() => handleEdit(item)}

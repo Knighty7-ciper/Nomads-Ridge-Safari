@@ -48,7 +48,7 @@ export default function BookingInquiryPage() {
         const { data } = await response.json()
         
         if (!data) {
-          console.error("Error fetching booking:", supabaseError)
+          console.error("Error fetching booking: No data returned")
           setError("Failed to load booking details")
         } else {
           setBooking(data)

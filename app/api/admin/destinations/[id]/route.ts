@@ -1,30 +1,31 @@
-import { createClient } from '@supabase/supabase-js'
+import mysql from 'mysql2/promise'
 
-const supabase = createClient(
-  process.env.NEXT_PUBLIC_SUPABASE_URL || '',
-  process.env.SUPABASE_SERVICE_ROLE_KEY || ''
-)
-
-const ADMIN_EMAIL = 'bknglabs.dev@gmail.com'
+const dbConfig = {
+  host: process.env.MYSQL_HOST || 'localhost',
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || '',
+  database: process.env.MYSQL_DATABASE || 'nomads_ridge'
+}
 
 async function verifyAuth(request: Request) {
   const token = request.headers.get('Authorization')?.replace('Bearer ', '')
-  return token === localStorage?.getItem?.('admin_token') || token === process.env.ADMIN_TOKEN
+  return token?.startsWith('admin_token_')
 }
 
 export async function PUT(request: Request, { params }: { params: { id: string } }) {
   try {
-    if (!verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
+    if (!await verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
 
     const data = await request.json()
-    const { data: result, error } = await supabase
-      .from('destinations')
-      .update(data)
-      .eq('id', params.id)
-      .select()
+    const connection = await mysql.createConnection(dbConfig)
+    const updateKeys = Object.keys(data)
+    const updateValues = Object.values(data)
+    const updateStr = updateKeys.map(k => `${k} = ?`).join(', ')
 
-    if (error) return new Response(error.message, { status: 400 })
-    return new Response(JSON.stringify(result), { status: 200 })
+    await connection.execute(`UPDATE destinations SET ${updateStr} WHERE id = ?`, [...updateValues, params.id])
+    await connection.end()
+
+    return new Response(JSON.stringify({ id: params.id, ...data }), { status: 200 })
   } catch (error) {
     return new Response('Internal Server Error', { status: 500 })
   }
@@ -32,11 +33,12 @@ export async function PUT(request: Request, { params }: { params: { id: string }
 
 export async function DELETE(request: Request, { params }: { params: { id: string } }) {
   try {
-    if (!verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
+    if (!await verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
 
-    const { error } = await supabase.from('destinations').delete().eq('id', params.id)
+    const connection = await mysql.createConnection(dbConfig)
+    await connection.execute('DELETE FROM destinations WHERE id = ?', [params.id])
+    await connection.end()
 
-    if (error) return new Response(error.message, { status: 400 })
     return new Response('Deleted successfully', { status: 200 })
   } catch (error) {
     return new Response('Internal Server Error', { status: 500 })

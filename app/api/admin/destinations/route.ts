@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
-import { createClient } from "@supabase/supabase-js"
+import mysql from 'mysql2/promise'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY
-
-const supabase = createClient(supabaseUrl!, supabaseKey!)
+const dbConfig = {
+  host: process.env.MYSQL_HOST || 'localhost',
+  user: process.env.MYSQL_USER || 'root',
+  password: process.env.MYSQL_PASSWORD || '',
+  database: process.env.MYSQL_DATABASE || 'nomads_ridge'
+}
 
 function checkAdminAuth(request: NextRequest): boolean {
   const token = request.headers.get("authorization")?.replace("Bearer ", "")
@@ -18,10 +20,10 @@ export async function GET(request: NextRequest) {
   }
 
   try {
-    const { data, error } = await supabase.from("destinations").select("*").order("created_at", { ascending: false })
-
-    if (error) throw error
-    return NextResponse.json({ data })
+    const connection = await mysql.createConnection(dbConfig)
+    const [rows] = await connection.execute('SELECT * FROM destinations ORDER BY created_at DESC')
+    await connection.end()
+    return NextResponse.json({ data: rows })
   } catch (error) {
     console.error("[v0] Get destinations error:", error)
     return NextResponse.json({ error: "Failed to fetch destinations" }, { status: 500 })
@@ -38,23 +40,14 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     const { name, country_id, description, image_url, highlights, best_time_to_visit, wildlife } = body
 
-    const { data, error } = await supabase
-      .from("destinations")
-      .insert([
-        {
-          name,
-          country_id,
-          description,
-          image_url,
-          highlights,
-          best_time_to_visit,
-          wildlife,
-        },
-      ])
-      .select()
+    const connection = await mysql.createConnection(dbConfig)
+    const [result] = await connection.execute(
+      'INSERT INTO destinations (name, country_id, description, image_url, highlights, best_time_to_visit, wildlife) VALUES (?, ?, ?, ?, ?, ?, ?)',
+      [name, country_id, description, image_url, highlights, best_time_to_visit, wildlife]
+    )
+    await connection.end()
 
-    if (error) throw error
-    return NextResponse.json({ data: data?.[0] }, { status: 201 })
+    return NextResponse.json({ data: { id: (result as any).insertId, name, country_id, description, image_url, highlights, best_time_to_visit, wildlife } }, { status: 201 })
   } catch (error) {
     console.error("[v0] Create destination error:", error)
     return NextResponse.json({ error: "Failed to create destination" }, { status: 500 })
@@ -71,14 +64,15 @@ export async function PUT(request: NextRequest) {
     const body = await request.json()
     const { id, ...updates } = body
 
-    const { data, error } = await supabase
-      .from("destinations")
-      .update(updates)
-      .eq("id", id)
-      .select()
+    const connection = await mysql.createConnection(dbConfig)
+    const updateKeys = Object.keys(updates)
+    const updateValues = Object.values(updates)
+    const updateStr = updateKeys.map(k => `${k} = ?`).join(', ')
 
-    if (error) throw error
-    return NextResponse.json({ data: data?.[0] })
+    await connection.execute(`UPDATE destinations SET ${updateStr} WHERE id = ?`, [...updateValues, id])
+    await connection.end()
+
+    return NextResponse.json({ data: { id, ...updates } })
   } catch (error) {
     console.error("[v0] Update destination error:", error)
     return NextResponse.json({ error: "Failed to update destination" }, { status: 500 })
@@ -99,9 +93,10 @@ export async function DELETE(request: NextRequest) {
       return NextResponse.json({ error: "ID required" }, { status: 400 })
     }
 
-    const { error } = await supabase.from("destinations").delete().eq("id", id)
+    const connection = await mysql.createConnection(dbConfig)
+    await connection.execute('DELETE FROM destinations WHERE id = ?', [id])
+    await connection.end()
 
-    if (error) throw error
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error("[v0] Delete destination error:", error)

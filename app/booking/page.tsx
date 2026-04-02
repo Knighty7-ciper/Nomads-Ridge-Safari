@@ -11,10 +11,8 @@ import { BookingStepTwo } from "@/components/booking/booking-step-two"
 import { BookingStepThree } from "@/components/booking/booking-step-three"
 import { BookingStepFour } from "@/components/booking/booking-step-four"
 import { BookingSummary } from "@/components/booking/booking-summary"
-import { getSupabaseClient } from "@/lib/supabase/client"
 import { PricingEngine } from "@/lib/pricing-engine"
 import Link from "next/link"
-import { createClient } from '@supabase/supabase-js'
 
 export interface BookingData {
   bookingType: "destination" | "hotel"
@@ -61,8 +59,6 @@ export default function BookingPage() {
       phone: "",
     },
   })
-
-  const supabase = getSupabaseClient()
 
   useEffect(() => {
     const destination = searchParams.get("destination")
@@ -122,11 +118,6 @@ export default function BookingPage() {
     setIsSubmitting(true)
 
     try {
-      const supabase = getSupabaseClient()
-      if (!supabase) {
-        throw new Error("Booking system is not available. Please check your configuration.")
-      }
-
       const pricingEngine = new PricingEngine()
       const totalPrice = pricingEngine.calculatePrice({
         destination: bookingData.bookingType === "destination" ? bookingData.destination : bookingData.hotel || "",
@@ -136,12 +127,14 @@ export default function BookingPage() {
         children: bookingData.children,
       })
 
-      const { data: booking, error } = await supabase
-        .from("bookings")
-        .insert({
+      // Submit booking via MySQL API
+      const response = await fetch("/api/bookings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
           booking_type: bookingData.bookingType,
-          destination_id: bookingData.bookingType === "destination" ? 1 : null, // Simplified for demo
-          hotel_id: bookingData.bookingType === "hotel" ? 1 : null, // Simplified for demo
+          destination_id: bookingData.bookingType === "destination" ? 1 : null,
+          hotel_id: bookingData.bookingType === "hotel" ? 1 : null,
           customer_name: `${bookingData.contactInfo.firstName} ${bookingData.contactInfo.lastName}`,
           customer_email: bookingData.contactInfo.email,
           customer_phone: bookingData.contactInfo.phone,
@@ -152,42 +145,14 @@ export default function BookingPage() {
           total_price: totalPrice,
           special_requests: bookingData.specialRequests,
           status: "pending",
-        })
-        .select()
-        .single()
-
-      if (error) {
-        console.error("Error saving booking:", error)
-        throw error
-      }
-
-      const itemName = bookingData.bookingType === "destination" ? bookingData.destination : bookingData.hotel
-
-      await supabase.from("contact_inquiries").insert({
-        name: `${bookingData.contactInfo.firstName} ${bookingData.contactInfo.lastName}`,
-        email: bookingData.contactInfo.email,
-        phone: bookingData.contactInfo.phone,
-        subject: `${bookingData.bookingType === "destination" ? "Safari" : "Hotel"} Booking Inquiry - ${itemName}`,
-        message: `Booking inquiry for ${itemName} from ${bookingData.startDate?.toLocaleDateString()} to ${bookingData.endDate?.toLocaleDateString()}. ${bookingData.adults} adults, ${bookingData.children} children. Special requests: ${bookingData.specialRequests || "None"}`,
-        status: "new",
+        }),
       })
 
-      await supabase.from("email_notifications").insert([
-        {
-          recipient_email: bookingData.contactInfo.email,
-          subject: `Booking Confirmation - ${itemName}`,
-          message: `Thank you for your booking inquiry for ${itemName}. We will contact you within 24 hours to confirm your booking.`,
-          email_type: "booking_confirmation",
-          status: "sent",
-        },
-        {
-          recipient_email: "admin@nomadsridge.travel",
-          subject: `New Booking Inquiry - ${itemName}`,
-          message: `New booking inquiry from ${bookingData.contactInfo.firstName} ${bookingData.contactInfo.lastName} for ${itemName}.`,
-          email_type: "admin_alert",
-          status: "sent",
-        },
-      ])
+      if (!response.ok) {
+        throw new Error("Failed to submit booking")
+      }
+
+      const { data: booking } = await response.json()
 
       localStorage.setItem("currentBookingId", booking.id)
 
