@@ -12,7 +12,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Phone, Mail, MapPin, Clock, Send, MessageCircle } from "lucide-react"
 import Link from "next/link"
-import EmailService from "@/lib/email-service"
 import Footer from "@/components/layout/footer"
 import { HeroSection } from "@/components/sections/hero-section"
 
@@ -44,13 +43,6 @@ export default function ContactPage() {
     }
     inquiries.push(newInquiry)
     localStorage.setItem("contactInquiries", JSON.stringify(inquiries))
-
-    const emailService = EmailService.getInstance()
-    try {
-      await emailService.sendContactInquiry(newInquiry)
-    } catch (error) {
-      console.error("Failed to send contact inquiry email:", error)
-    }
 
     setIsSubmitting(false)
     alert("Thank you for your message! We'll get back to you within 24 hours.")
