@@ -174,7 +174,7 @@ export default function PackagesPremium({
 
                 {/* CTA Button */}
                 <Link
-                  href="/contact"
+                  href={`/booking?package=${pkg.id}`}
                   className={`block text-center py-3 px-6 uppercase text-xs font-semibold tracking-wider transition-all duration-300 ${
                     pkg.isFeatured
                       ? 'bg-ochre text-card hover:bg-ochre/90'

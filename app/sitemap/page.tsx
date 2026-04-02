@@ -75,31 +75,31 @@ export default function SitemapPage() {
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </Link>
               <Link
-                href="/destinations/1"
+                href="/destinations/maasai-mara"
                 className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
               >
                 <span>Maasai Mara Safari</span>
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </Link>
               <Link
-                href="/destinations/2"
-                className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
-              >
-                <span>Lake Naivasha</span>
-                <ExternalLink className="w-4 h-4 text-gray-400" />
-              </Link>
-              <Link
-                href="/destinations/3"
+                href="/destinations/amboseli"
                 className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
               >
                 <span>Amboseli National Park</span>
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </Link>
               <Link
-                href="/destinations/4"
+                href="/destinations/tsavo"
                 className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
               >
                 <span>Tsavo National Parks</span>
+                <ExternalLink className="w-4 h-4 text-gray-400" />
+              </Link>
+              <Link
+                href="/destinations/samburu"
+                className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
+              >
+                <span>Samburu National Reserve</span>
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </Link>
             </CardContent>
@@ -148,6 +148,13 @@ export default function SitemapPage() {
               <CardTitle>Support & Services</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
+              <Link
+                href="/booking-help"
+                className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
+              >
+                <span>Booking Assistance</span>
+                <ExternalLink className="w-4 h-4 text-gray-400" />
+              </Link>
               <Link
                 href="/travel-insurance"
                 className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
@@ -223,17 +230,24 @@ export default function SitemapPage() {
             </CardContent>
           </Card>
 
-          {/* Account */}
+          {/* Booking & Account */}
           <Card>
             <CardHeader>
-              <CardTitle>Account</CardTitle>
+              <CardTitle>Booking & Account</CardTitle>
             </CardHeader>
             <CardContent className="space-y-3">
               <Link
-                href="/contact"
+                href="/booking"
                 className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
               >
                 <span>Book Your Safari</span>
+                <ExternalLink className="w-4 h-4 text-gray-400" />
+              </Link>
+              <Link
+                href="/booking/inquiry"
+                className="flex items-center justify-between p-2 hover:bg-gray-50 rounded transition-colors"
+              >
+                <span>Custom Safari Inquiry</span>
                 <ExternalLink className="w-4 h-4 text-gray-400" />
               </Link>
               <Link

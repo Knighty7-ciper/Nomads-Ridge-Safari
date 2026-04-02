@@ -38,7 +38,7 @@ export function HeroSection({
   showLogo = true,
   primaryCTA = {
     text: "Start Your Journey",
-    href: "/contact",
+    href: "/booking",
   },
   secondaryCTA = {
     text: "Speak to Expert",

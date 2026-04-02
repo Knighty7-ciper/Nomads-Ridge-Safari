@@ -99,7 +99,7 @@ export function MainNavigation() {
                 </Button>
               </Link>
 
-              <Link href="/contact">
+              <Link href="/booking">
                 <Button className="bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white shadow-md hidden sm:inline-flex font-medium">
                   Book Now
                 </Button>
@@ -146,7 +146,7 @@ export function MainNavigation() {
                           My Profile
                         </Button>
                       </Link>
-                      <Link href="/contact" onClick={() => setIsOpen(false)}>
+                      <Link href="/booking" onClick={() => setIsOpen(false)}>
                         <Button className="w-full bg-gradient-to-r from-amber-600 to-amber-700 hover:from-amber-700 hover:to-amber-800 text-white shadow-md font-medium">
                           Book Now
                         </Button>
