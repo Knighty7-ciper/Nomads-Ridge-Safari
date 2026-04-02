@@ -6,7 +6,7 @@ import TestimonialsPremium from "@/components/sections/testimonials-premium"
 
 const destinations = [
   {
-    slug: "maasai-mara",
+    id: "1",
     name: "Masai Mara",
     country: "Kenya",
     description: "Home to the Great Migration and the most abundant wildlife in Africa",
@@ -14,7 +14,7 @@ const destinations = [
     highlight: "Great Migration",
   },
   {
-    slug: "amboseli",
+    id: "2",
     name: "Amboseli National Park",
     country: "Kenya",
     description: "Stunning views of Mount Kilimanjaro and large elephant populations",
@@ -22,7 +22,7 @@ const destinations = [
     highlight: "Kilimanjaro Views",
   },
   {
-    slug: "serengeti",
+    id: "3",
     name: "Serengeti National Park",
     country: "Tanzania",
     description: "Endless plains supporting the world's largest mammal migration",
@@ -30,7 +30,7 @@ const destinations = [
     highlight: "2M Animal Migration",
   },
   {
-    slug: "ngorongoro",
+    id: "4",
     name: "Ngorongoro Crater",
     country: "Tanzania",
     description: "A natural wonder with incredible biodiversity and volcanic beauty",
@@ -38,7 +38,7 @@ const destinations = [
     highlight: "UNESCO World Heritage",
   },
   {
-    slug: "bwindi",
+    id: "5",
     name: "Bwindi Impenetrable National Park",
     country: "Uganda",
     description: "Encounter endangered mountain gorillas in their natural habitat",
@@ -46,7 +46,7 @@ const destinations = [
     highlight: "Mountain Gorillas",
   },
   {
-    slug: "volcanoes",
+    id: "6",
     name: "Volcanoes National Park",
     country: "Rwanda",
     description: "Lush forests home to endangered mountain gorillas and stunning views",
@@ -76,7 +76,7 @@ export default function DestinationsPage() {
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {destinations.map((dest) => (
-              <Link key={dest.slug} href={`/destinations/${dest.slug}`}>
+              <Link key={dest.id} href={`/destinations/${dest.id}`}>
                 <div className="group cursor-pointer h-full flex flex-col">
                   {/* Image Container */}
                   <div className="relative h-64 overflow-hidden bg-clay/10 mb-4">

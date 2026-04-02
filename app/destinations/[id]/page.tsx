@@ -8,6 +8,16 @@ import Footer from '@/components/layout/footer'
 import TestimonialsPremium from '@/components/sections/testimonials-premium'
 import { formatPrice, convertToKES } from '@/lib/currency'
 
+// Numeric ID to string key mapping
+const idMap: { [key: string]: string } = {
+  '1': 'maasai-mara-safari',
+  '2': 'amboseli-kenya',
+  '3': 'serengeti-tanzania',
+  '4': 'ngorongoro-crater',
+  '5': 'bwindi-uganda',
+  '6': 'volcanoes-rwanda',
+}
+
 const destinations = {
   'maasai-mara-safari': {
     id: 'maasai-mara-safari',
@@ -192,7 +202,8 @@ const destinations = {
 }
 
 export default function DestinationDetail({ params }: { params: { id: string } }) {
-  const destination = destinations[params.id as keyof typeof destinations]
+  const destinationKey = idMap[params.id] || params.id
+  const destination = destinations[destinationKey as keyof typeof destinations]
   const [selectedImageIndex, setSelectedImageIndex] = useState(0)
   const [isVisible, setIsVisible] = useState(false)
 

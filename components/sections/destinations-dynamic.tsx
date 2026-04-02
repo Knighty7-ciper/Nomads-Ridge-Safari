@@ -6,8 +6,7 @@ import Link from 'next/link'
 
 const destinations = [
   {
-    id: 'maasai-mara-safari',
-    slug: 'maasai-mara-safari',
+    id: '1',
     name: 'Maasai Mara',
     country: 'Kenya',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg',
@@ -15,8 +14,7 @@ const destinations = [
     featured: true,
   },
   {
-    id: 'serengeti-tanzania',
-    slug: 'serengeti-tanzania',
+    id: '3',
     name: 'Serengeti',
     country: 'Tanzania',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seregeti%20dawns-sna119zI11DkWOvBNKqR4QZ8jHqXLJ.jpg',
@@ -24,8 +22,7 @@ const destinations = [
     featured: false,
   },
   {
-    id: 'ngorongoro-crater',
-    slug: 'ngorongoro-crater',
+    id: '4',
     name: 'Ngorongoro',
     country: 'Tanzania',
     image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ngorongoro%20stars-0dp4SzAsFG1V4tukuLrrm3m2xxwuml.jpg',
@@ -33,11 +30,10 @@ const destinations = [
     featured: false,
   },
   {
-    id: 'bwindi-uganda',
-    slug: 'bwindi-uganda',
+    id: '5',
     name: 'Bwindi',
     country: 'Uganda',
-    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rwanda%20canopy-xyGm95PrO7weFzo4UQ90Wl9Ifpkh1j.jpg',
+    image: 'https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bwindi%20Forest-gIiVyTLcwtTU2YKTblAL44MGQOxM3y.jpg',
     description: 'Trek through misty forests and encounter endangered mountain gorillas in their habitat.',
     featured: false,
   },
@@ -83,7 +79,7 @@ export default function DestinationsDynamic() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12 relative z-10">
         {/* Featured Large Card - First Item */}
         <Link
-          href={`/destinations/${destinations[0].slug}`}
+          href={`/destinations/${destinations[0].id}`}
           className={`sm:row-span-2 relative overflow-hidden cursor-pointer group aspect-square sm:aspect-[3/4] rounded-sm transition-all duration-700 ${
             animatingCards.has(destinations[0].id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
           }`}
@@ -107,7 +103,7 @@ export default function DestinationsDynamic() {
         {destinations.slice(1).map((dest, index) => (
           <Link
             key={dest.id}
-            href={`/destinations/${dest.slug}`}
+            href={`/destinations/${dest.id}`}
             className={`relative overflow-hidden cursor-pointer group aspect-square rounded-sm transition-all duration-700 ${
               animatingCards.has(dest.id) ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'
             }`}
