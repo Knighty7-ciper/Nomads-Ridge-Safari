@@ -252,27 +252,40 @@
 }
 
 .animate-slideUp {
-  animation: slideUp 0.6s ease-out;
+  animation-name: slideUp;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
 }
 
 .animate-slideIn {
-  animation: slideIn 0.4s ease-out;
+  animation-name: slideIn;
+  animation-duration: 0.4s;
+  animation-timing-function: ease-out;
 }
 
 .animate-scaleIn {
-  animation: scaleIn 0.5s ease-out;
+  animation-name: scaleIn;
+  animation-duration: 0.5s;
+  animation-timing-function: ease-out;
 }
 
 .animate-rotateIn {
-  animation: rotateIn 0.6s ease-out;
+  animation-name: rotateIn;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
 }
 
 .animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
+  animation-name: fadeInUp;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
 }
 
 .animate-pulse-slow {
-  animation: pulse 3s ease-in-out infinite;
+  animation-name: pulse;
+  animation-duration: 3s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
 }
 
 /* Reveal & Scroll Animations */
@@ -308,15 +321,24 @@
 }
 
 .animate-revealUp {
-  animation: revealUp 0.8s ease-out forwards;
+  animation-name: revealUp;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 .animate-revealDown {
-  animation: revealDown 0.8s ease-out forwards;
+  animation-name: revealDown;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 .animate-staggerFadeIn {
-  animation: staggerFadeIn 0.6s ease-out forwards;
+  animation-name: staggerFadeIn;
+  animation-duration: 0.6s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 /* Stagger delays */
