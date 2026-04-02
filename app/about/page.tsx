@@ -3,6 +3,7 @@
 import Link from "next/link"
 import Footer from "@/components/layout/footer"
 import FAQSection from "@/components/sections/faq-section"
+import TestimonialsPremium from "@/components/sections/testimonials-premium"
 
 export default function About() {
   return (
@@ -155,6 +156,10 @@ export default function About() {
           </Link>
         </div>
       </div>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsPremium />
+
       {/* FAQ SECTION */}
       <FAQSection />
       <Footer />

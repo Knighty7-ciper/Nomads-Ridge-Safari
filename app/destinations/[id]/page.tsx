@@ -22,6 +22,7 @@ import {
 } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
+import TestimonialsPremium from "@/components/sections/testimonials-premium"
 
 const destinations = {
   "maasai-mara-safari": {
@@ -898,6 +899,9 @@ export default function DestinationDetailPage({ params }: { params: { id: string
           </div>
         </div>
       </div>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsPremium />
     </div>
   )
 }

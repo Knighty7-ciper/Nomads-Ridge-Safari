@@ -3,7 +3,8 @@
 import Footer from '@/components/layout/footer'
 import Image from 'next/image'
 import ProcessSection from '@/components/sections/process-section'
-import TestimonialsCarousel from '@/components/sections/testimonials-carousel'
+import TestimonialsPremium from '@/components/sections/testimonials-premium'
+import PackagesPremium from '@/components/sections/packages-premium'
 
 export default function Home() {
   return (
@@ -219,11 +220,14 @@ export default function Home() {
         </div>
       </section>
 
+      {/* PACKAGES SECTION */}
+      <PackagesPremium />
+
       {/* PROCESS SECTION */}
       <ProcessSection />
 
       {/* TESTIMONIALS SECTION */}
-      <TestimonialsCarousel />
+      <TestimonialsPremium />
 
       {/* CONTACT CTA */}
       <section id="contact" className="py-12 md:py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-br from-[#0d0804] to-[#1a0e06] text-center">

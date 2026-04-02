@@ -4,6 +4,7 @@ import Link from "next/link"
 import Image from "next/image"
 import Footer from "@/components/layout/footer"
 import { Eye, Heart, MessageCircle, ArrowRight } from "lucide-react"
+import TestimonialsPremium from "@/components/sections/testimonials-premium"
 
 const articles = [
   {
@@ -195,6 +196,10 @@ export default function Blog() {
           </Link>
         </div>
       </div>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsPremium />
+
       <Footer />
     </main>
   )

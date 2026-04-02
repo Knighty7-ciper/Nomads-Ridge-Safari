@@ -2,6 +2,7 @@ import Link from "next/link"
 import Image from "next/image"
 import Footer from "@/components/layout/footer"
 import { MapPin, Compass } from "lucide-react"
+import TestimonialsPremium from "@/components/sections/testimonials-premium"
 
 const destinations = [
   {
@@ -137,6 +138,9 @@ export default function DestinationsPage() {
           </Link>
         </div>
       </section>
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsPremium />
 
       <Footer />
     </main>
