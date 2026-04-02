@@ -6,10 +6,10 @@ import Link from "next/link"
 
 const destinations = {
   Kenya: [
-    { name: "Masai Mara", id: "1" },
-    { name: "Lake Naivasha", id: "2" },
-    { name: "Amboseli", id: "3" },
-    { name: "Tsavo", id: "4" },
+    { name: "Masai Mara", slug: "maasai-mara" },
+    { name: "Lake Naivasha", slug: "lake-naivasha" },
+    { name: "Amboseli", slug: "amboseli" },
+    { name: "Tsavo", slug: "tsavo" },
   ],
 }
 
@@ -37,8 +37,8 @@ export function DestinationsDropdown() {
           <div className="py-2">
             {(destinations.Kenya || []).map((dest) => (
               <Link
-                key={dest.id}
-                href={`/destinations/${dest.id}`}
+                key={dest.slug}
+                href={`/destinations/${dest.slug}`}
                 className="block px-4 py-3 hover:bg-ochre/10 text-dust text-sm font-medium transition-colors border-l-2 border-transparent hover:border-ochre hover:text-ochre"
               >
                 {dest.name}

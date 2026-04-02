@@ -1,8 +1,9 @@
 'use client'
 
 export const destinationsData: { [key: string]: any } = {
-  '1': {
-    id: '1',
+  'maasai-mara': {
+    id: 'maasai-mara',
+    slug: 'maasai-mara',
     name: 'Maasai Mara',
     country: 'Kenya',
     description:
@@ -224,8 +225,9 @@ export const destinationsData: { [key: string]: any } = {
       },
     ],
   },
-  '2': {
-    id: '2',
+  'lake-naivasha': {
+    id: 'lake-naivasha',
+    slug: 'lake-naivasha',
     name: 'Lake Naivasha',
     country: 'Kenya',
     description: 'A serene freshwater lake surrounded by lush vegetation, rich birdlife, and peaceful water-based adventures.',
@@ -417,8 +419,9 @@ export const destinationsData: { [key: string]: any } = {
       },
     ],
   },
-  '3': {
-    id: '3',
+  'amboseli': {
+    id: 'amboseli',
+    slug: 'amboseli',
     name: 'Amboseli National Park',
     country: 'Kenya',
     description: 'Standing in the shadow of Mount Kilimanjaro with vast elephant herds and stunning vistas.',
@@ -617,8 +620,9 @@ export const destinationsData: { [key: string]: any } = {
       },
     ],
   },
-  '4': {
-    id: '4',
+  'tsavo': {
+    id: 'tsavo',
+    slug: 'tsavo',
     name: 'Tsavo National Park',
     country: 'Kenya',
     description: 'Kenya\'s largest park with rugged beauty, the iconic red earth, and diverse wildlife thriving in extreme conditions.',

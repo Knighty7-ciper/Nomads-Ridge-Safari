@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Gallery — Nomads Ridge Safaris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dust:  #f5ede0;
+  --clay:  #c8622a;
+  --ochre: #d4943a;
+  --bark:  #2c1a0e;
+  --dusk:  #1a1209;
+  --deep:  #0d0a04;
+  --sand:  #e8d5b0;
+  --sage:  #6b7c5c;
+  --mara-gold: #e8a020;
+  --mara-grass: #8a7a30;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--deep);
+  color: var(--dust);
+  font-family: 'Outfit', sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+/* ─── CINEMATIC HERO ─── */
+.hero {
+  position:relative; min-height:60vh;
+  display:flex; align-items:flex-end; overflow:hidden;
+}
+.hero-sky {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(232,160,32,0.2) 0%, transparent 45%),
+    linear-gradient(170deg, #2a1508 0%, #1a0e04 35%, #0d0804 60%, #0a0604 100%);
+}
+.hero-sun {
+  position:absolute; top:20%; left:50%; transform:translateX(-50%);
+  width:180px; height:180px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,160,32,0.35) 0%, rgba(200,98,42,0.15) 40%, transparent 70%);
+  animation:sunPulse 4s ease-in-out infinite;
+}
+@keyframes sunPulse { 0%,100%{transform:translateX(-50%) scale(1);opacity:0.8} 50%{transform:translateX(-50%) scale(1.1);opacity:1} }
+
+.horizon-layer {
+  position:absolute; bottom:0; left:0; right:0; pointer-events:none;
+}
+
+.hero-content {
+  position:relative; z-index:2;
+  padding:3rem 5rem 5rem; width:100%;
+}
+.hero-breadcrumb {
+  font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase;
+  opacity:0.45; margin-bottom:1.5rem;
+  display:flex; align-items:center; gap:0.6rem;
+}
+.hero-breadcrumb span { color:var(--ochre); opacity:1; }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem, 7vw, 6rem);
+  font-weight:300; line-height:1; margin-bottom:1rem;
+}
+.hero h1 em { font-style:italic; color:var(--ochre); }
+.hero p {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem; font-style:italic; opacity:0.72;
+  max-width:600px; line-height:1.7;
+}
+
+/* ─── GALLERY INTRO ─── */
+.intro { background:var(--dusk); padding:5rem 5rem; text-align:center; }
+.intro p { font-size:1.05rem; line-height:1.9; opacity:0.65; max-width:700px; margin:1rem auto 0; }
+
+/* ─── FILTER BAR ─── */
+.filter-bar { background:#100c06; padding:2rem 5rem; position:sticky; top:0; z-index:100; }
+.filter-inner { display:flex; justify-content:center; flex-wrap:wrap; gap:0.5rem; }
+.filter-btn {
+  background:transparent; border:1px solid rgba(245,237,224,0.1);
+  color:var(--dust); padding:0.6rem 1.5rem;
+  font-family:'Outfit',sans-serif; font-size:0.75rem; letter-spacing:0.15em;
+  text-transform:uppercase; cursor:pointer; transition:all 0.3s; opacity:0.6;
+}
+.filter-btn:hover, .filter-btn.active { border-color:var(--clay); color:var(--ochre); opacity:1; background:rgba(200,98,42,0.08); }
+
+/* ─── GALLERY GRID ─── */
+.gallery { background:var(--deep); padding:4rem 5rem; }
+.gallery-grid {
+  display:grid;
+  grid-template-columns:repeat(4, 1fr);
+  grid-auto-rows:280px;
+  gap:1rem;
+}
+.gallery-item {
+  position:relative; overflow:hidden; cursor:pointer;
+  background:linear-gradient(135deg,#1a1209,#2a1a0e);
+}
+.gallery-item.tall { grid-row:span 2; }
+.gallery-item.wide { grid-column:span 2; }
+.gallery-item.large { grid-column:span 2; grid-row:span 2; }
+
+/* Placeholder images - replace with actual images */
+.gallery-img {
+  position:absolute; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background-size:cover; background-position:center;
+  transition:transform 0.5s, filter 0.3s;
+}
+.gallery-item:hover .gallery-img { transform:scale(1.05); filter:brightness(0.7); }
+
+.gallery-overlay {
+  position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.8) 0%,transparent 50%);
+  opacity:0; transition:opacity 0.3s; display:flex; flex-direction:column; justify-content:flex-end; padding:1.5rem;
+}
+.gallery-item:hover .gallery-overlay { opacity:1; }
+.gallery-overlay h4 {
+  font-family:'Cormorant Garamond',serif; font-size:1.2rem; font-weight:400;
+}
+.gallery-overlay span { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ochre); margin-top:0.3rem; }
+
+/* Gallery placeholder scenes */
+.scene-elephants {
+  background:radial-gradient(ellipse at 50% 60%,rgba(139,85,19,0.5) 0%,transparent 50%),
+  linear-gradient(135deg,#1a0e04 0%,#3a2010 50%,#5a3510 100%);
+}
+.scene-kili {
+  background:radial-gradient(ellipse at 50% 30%,rgba(74,124,156,0.5) 0%,transparent 50%),
+  linear-gradient(135deg,#0d1820 0%,#1a2a3a 50%,#2a3a4a 100%);
+}
+.scene-lions {
+  background:radial-gradient(ellipse at 50% 50%,rgba(160,82,45,0.4) 0%,transparent 50%),
+  linear-gradient(135deg,#2a1008 0%,#4a2010 50%,#6a3010 100%);
+}
+.scene-giraffe {
+  background:radial-gradient(ellipse at 50% 40%,rgba(61,122,90,0.4) 0%,transparent 50%),
+  linear-gradient(135deg,#0d1a0a 0%,#1a3020 50%,#2a4030 100%);
+}
+.scene-lake {
+  background:radial-gradient(ellipse at 50% 50%,rgba(45,106,106,0.4) 0%,transparent 50%),
+  linear-gradient(135deg,#0d1a1a 0%,#1a2a2a 50%,#2a3a3a 100%);
+}
+.scene-camp {
+  background:radial-gradient(ellipse at 50% 40%,rgba(232,160,32,0.3) 0%,transparent 50%),
+  linear-gradient(135deg,#1a0e04 0%,#2a1a08 50%,#3a2808 100%);
+}
+.scene-birds {
+  background:radial-gradient(ellipse at 30% 50%,rgba(255,200,100,0.3) 0%,transparent 50%),
+  linear-gradient(135deg,#1a1508 0%,#2a2010 50%,#3a2a18 100%);
+}
+.scene-sunset {
+  background:radial-gradient(ellipse at 50% 60%,rgba(232,100,50,0.5) 0%,transparent 50%),
+  linear-gradient(to bottom,#1a0808 0%,#2a1008 50%,#3a1808 100%);
+}
+.scene-maasai {
+  background:radial-gradient(ellipse at 50% 50%,rgba(200,40,20,0.3) 0%,transparent 50%),
+  linear-gradient(135deg,#1a0808 0%,#3a1010 50%,#5a1818 100%);
+}
+.scene-buffalo {
+  background:radial-gradient(ellipse at 50% 50%,rgba(100,80,50,0.4) 0%,transparent 50%),
+  linear-gradient(135deg,#1a1510 0%,#2a2018 50%,#3a2a20 100%);
+}
+
+.gallery-icon { font-size:2rem; margin-bottom:0.5rem; opacity:0.4; }
+
+/* ─── LIGHTBOX ─── */
+.lightbox {
+  position:fixed; inset:0; background:rgba(0,0,0,0.95); z-index:1000;
+  display:none; align-items:center; justify-content:center; padding:2rem;
+}
+.lightbox.open { display:flex; }
+.lightbox-content {
+  max-width:90vw; max-height:90vh; position:relative;
+}
+.lightbox-img {
+  max-width:100%; max-height:85vh; object-fit:contain;
+}
+.lightbox-close {
+  position:absolute; top:-3rem; right:0;
+  background:none; border:none; color:var(--dust); font-size:2rem;
+  cursor:pointer; opacity:0.7; transition:opacity 0.3s;
+}
+.lightbox-close:hover { opacity:1; }
+.lightbox-info { text-align:center; margin-top:1rem; }
+.lightbox-info h4 { font-family:'Cormorant Garamond',serif; font-size:1.3rem; }
+.lightbox-info span { font-size:0.75rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--ochre); }
+.lightbox-nav {
+  position:absolute; top:50%; transform:translateY(-50%);
+  background:rgba(245,237,224,0.1); border:none; color:var(--dust);
+  width:50px; height:50px; border-radius:50%; font-size:1.5rem;
+  cursor:pointer; transition:background 0.3s;
+}
+.lightbox-nav:hover { background:rgba(245,237,224,0.2); }
+.lightbox-prev { left:-4rem; }
+.lightbox-next { right:-4rem; }
+
+/* ─── TESTIMONIAL STRIP ─── */
+.testimonials { background:var(--dusk); padding:5rem 5rem; text-align:center; }
+.testi-quote {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(1.3rem,3vw,2rem);
+  font-style:italic; line-height:1.5; max-width:900px; margin:0 auto 1.5rem;
+}
+.testi-quote em { color:var(--ochre); font-style:normal; }
+.testi-attr { font-size:0.75rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; }
+
+/* ─── CTA ─── */
+.cta { background:#100c06; padding:5rem 5rem; text-align:center; }
+.cta h2 { margin-bottom:0.5rem; }
+.cta > p { opacity:0.6; margin-bottom:2rem; }
+.cta-btn {
+  background:var(--clay); color:var(--dust); text-decoration:none;
+  padding:1rem 3rem; font-size:0.8rem; letter-spacing:0.2em;
+  text-transform:uppercase; font-weight:500; transition:background 0.3s;
+  display:inline-block;
+}
+.cta-btn:hover { background:var(--ochre); }
+
+/* ─── SHARED STYLES ─── */
+.section-tag {
+  font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase;
+  color:var(--clay); margin-bottom:0.9rem;
+  display:flex; align-items:center; justify-content:center; gap:0.7rem;
+}
+.section-tag::before, .section-tag::after { content:''; display:block; width:26px; height:1px; background:var(--clay); }
+h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300; line-height:1.1; color:var(--dust);
+}
+h2 em { font-style:italic; color:var(--ochre); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* Mobile */
+@media(max-width:1100px){
+  .gallery-grid { grid-template-columns:repeat(3, 1fr); }
+  .lightbox-nav { display:none; }
+}
+@media(max-width:900px){
+  .hero-content, .intro, .gallery, .testimonials, .cta { padding:3rem 1.5rem; }
+  .filter-bar { padding:1rem 1.5rem; }
+  .gallery-grid { grid-template-columns:repeat(2, 1fr); grid-auto-rows:200px; }
+  .gallery-item.tall, .gallery-item.wide, .gallery-item.large { grid-column:span 1; grid-row:span 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-sky"></div>
+  <div class="hero-sun"></div>
+  <div class="horizon-layer">
+    <svg viewBox="0 0 1440 180" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:180px;width:100%">
+      <path fill="rgba(26,18,8,0.5)" d="M0,100 C100,80 200,50 320,42 C420,36 500,75 620,68 C720,62 800,25 960,18 C1080,12 1160,50 1300,55 L1440,58 L1440,180 L0,180 Z"/>
+      <rect x="200" y="70" width="4" height="110" fill="#1a0e06"/>
+      <ellipse cx="202" cy="52" rx="55" ry="20" fill="#1a0e06" opacity="0.9"/>
+      <rect x="1000" y="85" width="3" height="95" fill="#1a0e06"/>
+      <ellipse cx="1001" cy="70" rx="42" ry="16" fill="#1a0e06" opacity="0.85"/>
+      <path fill="#0d0804" d="M0,140 C200,130 400,120 600,128 C800,136 1000,125 1200,130 C1320,134 1400,128 1440,126 L1440,180 L0,180 Z"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">Nomads Ridge Safaris <span>›</span> Gallery</div>
+    <h1>Moments from the <em>Wild</em></h1>
+    <p>"Every photograph tells a story. Here are some from ours."</p>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<div class="intro">
+  <div class="section-tag reveal">Our Gallery</div>
+  <h2 class="reveal d1">Wildlife. Landscapes. <em>Memories.</em></h2>
+  <p class="reveal">Images from our safaris across Kenya — the Maasai Mara, Amboseli, Tsavo, and the Great Rift Valley. Every shot taken by our guides, guests, or team.</p>
+</div>
+
+<!-- ═══ FILTER BAR ═══ -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <button class="filter-btn active" data-filter="all">All</button>
+    <button class="filter-btn" data-filter="wildlife">Wildlife</button>
+    <button class="filter-btn" data-filter="landscapes">Landscapes</button>
+    <button class="filter-btn" data-filter="camps">Camps & Lodges</button>
+    <button class="filter-btn" data-filter="culture">Culture</button>
+    <button class="filter-btn" data-filter="birds">Birds</button>
+  </div>
+</div>
+
+<!-- ═══ GALLERY GRID ═══ -->
+<section class="gallery">
+  <div class="gallery-grid" id="galleryGrid">
+
+    <!-- Large featured - Elephant herd -->
+    <div class="gallery-item large reveal" data-category="wildlife" onclick="openLightbox(0)">
+      <div class="gallery-img scene-elephants">
+        <div class="gallery-icon">🐘</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Elephant Herd at Sunset</h4>
+        <span>Maasai Mara · Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Kilimanjaro -->
+    <div class="gallery-item tall reveal" data-category="landscapes" onclick="openLightbox(1)">
+      <div class="gallery-img scene-kili">
+        <div class="gallery-icon">🏔️</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Kilimanjaro at Dawn</h4>
+        <span>Amboseli · Landscape</span>
+      </div>
+    </div>
+
+    <!-- Lion -->
+    <div class="gallery-item reveal" data-category="wildlife" onclick="openLightbox(2)">
+      <div class="gallery-img scene-lions">
+        <div class="gallery-icon">🦁</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Maasai Mara Lion</h4>
+        <span>Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Giraffe -->
+    <div class="gallery-item reveal" data-category="wildlife" onclick="openLightbox(3)">
+      <div class="gallery-img scene-giraffe">
+        <div class="gallery-icon">🦒</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Giraffe on the Plain</h4>
+        <span>Lake Naivasha · Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Lake/hippos -->
+    <div class="gallery-item reveal" data-category="landscapes" onclick="openLightbox(4)">
+      <div class="gallery-img scene-lake">
+        <div class="gallery-icon">🦛</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Hippos at Lake Naivasha</h4>
+        <span>Landscape</span>
+      </div>
+    </div>
+
+    <!-- Tented camp -->
+    <div class="gallery-item wide reveal" data-category="camps" onclick="openLightbox(5)">
+      <div class="gallery-img scene-camp">
+        <div class="gallery-icon">🏕️</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Luxury Tented Camp</h4>
+        <span>Maasai Mara · Accommodation</span>
+      </div>
+    </div>
+
+    <!-- Birds - flamingo -->
+    <div class="gallery-item reveal" data-category="birds" onclick="openLightbox(6)">
+      <div class="gallery-img scene-birds">
+        <div class="gallery-icon">🦩</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Flamingos at Lake</h4>
+        <span>Birds</span>
+      </div>
+    </div>
+
+    <!-- Sunset -->
+    <div class="gallery-item tall reveal" data-category="landscapes" onclick="openLightbox(7)">
+      <div class="gallery-img scene-sunset">
+        <div class="gallery-icon">🌅</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Safari Sunset</h4>
+        <span>Tsavo · Landscape</span>
+      </div>
+    </div>
+
+    <!-- Maasai culture -->
+    <div class="gallery-item reveal" data-category="culture" onclick="openLightbox(8)">
+      <div class="gallery-img scene-maasai">
+        <div class="gallery-icon">💃</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Maasai Warrior Dance</h4>
+        <span>Culture</span>
+      </div>
+    </div>
+
+    <!-- Buffalo -->
+    <div class="gallery-item reveal" data-category="wildlife" onclick="openLightbox(9)">
+      <div class="gallery-img scene-buffalo">
+        <div class="gallery-icon">🐃</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Buffalo Herd</h4>
+        <span>Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Second large - wildebeest -->
+    <div class="gallery-item large reveal" data-category="wildlife" onclick="openLightbox(10)">
+      <div class="gallery-img scene-elephants">
+        <div class="gallery-icon">🦌</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Great Migration</h4>
+        <span>Maasai Mara · Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Bird - fish eagle -->
+    <div class="gallery-item reveal" data-category="birds" onclick="openLightbox(11)">
+      <div class="gallery-img scene-giraffe">
+        <div class="gallery-icon">🦅</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>African Fish Eagle</h4>
+        <span>Birds</span>
+      </div>
+    </div>
+
+    <!-- Lodge exterior -->
+    <div class="gallery-item reveal" data-category="camps" onclick="openLightbox(12)">
+      <div class="gallery-img scene-kili">
+        <div class="gallery-icon">🏨</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Lodge with Mountain View</h4>
+        <span>Amboseli · Accommodation</span>
+      </div>
+    </div>
+
+    <!-- Leopard -->
+    <div class="gallery-item reveal" data-category="wildlife" onclick="openLightbox(13)">
+      <div class="gallery-img scene-lions">
+        <div class="gallery-icon">🐆</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Leopard in the Tree</h4>
+        <span>Wildlife</span>
+      </div>
+    </div>
+
+    <!-- Acacia sunset -->
+    <div class="gallery-item wide reveal" data-category="landscapes" onclick="openLightbox(14)">
+      <div class="gallery-img scene-sunset">
+        <div class="gallery-icon">🌳</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Acacia at Golden Hour</h4>
+        <span>Maasai Mara · Landscape</span>
+      </div>
+    </div>
+
+    <!-- Zebra -->
+    <div class="gallery-item reveal" data-category="wildlife" onclick="openLightbox(15)">
+      <div class="gallery-img scene-giraffe">
+        <div class="gallery-icon">🦓</div>
+      </div>
+      <div class="gallery-overlay">
+        <h4>Plains Zebra</h4>
+        <span>Wildlife</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ LIGHTBOX ═══ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="closeLightbox()">×</button>
+  <button class="lightbox-nav lightbox-prev" onclick="navigateLightbox(-1)">‹</button>
+  <div class="lightbox-content">
+    <div class="lightbox-img" id="lightboxImg"></div>
+    <div class="lightbox-info">
+      <h4 id="lightboxTitle"></h4>
+      <span id="lightboxMeta"></span>
+    </div>
+  </div>
+  <button class="lightbox-nav lightbox-next" onclick="navigateLightbox(1)">›</button>
+</div>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<div class="testimonials">
+  <div class="section-tag reveal">Guest Photos</div>
+  <h2 class="reveal d1" style="margin-bottom:2rem;">Stories from our <em>guests</em></h2>
+  <p class="testi-quote reveal d2">
+    "We came home with 3,000 photographs and three that we'll frame forever. <em>The image of elephants with Kilimanjaro behind them</em> sits in our living room now. Every visitor asks about it."
+  </p>
+  <p class="testi-attr reveal d3">— Sarah & James Wanjiku, Nairobi · Amboseli Safari · October 2024</p>
+</div>
+
+<!-- ═══ CTA ═══ -->
+<div class="cta">
+  <div class="section-tag reveal">Ready to Create Your Own?</div>
+  <h2 class="reveal d1">Your photo could be <em>next</em></h2>
+  <p class="reveal d2">Every safari creates memories that last a lifetime. Let us help you capture yours.</p>
+  <div class="reveal d3" style="margin-top:2rem;">
+    <a href="booking.html" class="cta-btn">Start Planning Your Safari</a>
+  </div>
+</div>
+
+<script>
+// Gallery data
+const galleryItems = [
+  { title: 'Elephant Herd at Sunset', location: 'Maasai Mara · Wildlife', scene: 'scene-elephants', icon: '🐘' },
+  { title: 'Kilimanjaro at Dawn', location: 'Amboseli · Landscape', scene: 'scene-kili', icon: '🏔️' },
+  { title: 'Maasai Mara Lion', location: 'Wildlife', scene: 'scene-lions', icon: '🦁' },
+  { title: 'Giraffe on the Plain', location: 'Lake Naivasha · Wildlife', scene: 'scene-giraffe', icon: '🦒' },
+  { title: 'Hippos at Lake Naivasha', location: 'Landscape', scene: 'scene-lake', icon: '🦛' },
+  { title: 'Luxury Tented Camp', location: 'Maasai Mara · Accommodation', scene: 'scene-camp', icon: '🏕️' },
+  { title: 'Flamingos at Lake', location: 'Birds', scene: 'scene-birds', icon: '🦩' },
+  { title: 'Safari Sunset', location: 'Tsavo · Landscape', scene: 'scene-sunset', icon: '🌅' },
+  { title: 'Maasai Warrior Dance', location: 'Culture', scene: 'scene-maasai', icon: '💃' },
+  { title: 'Buffalo Herd', location: 'Wildlife', scene: 'scene-buffalo', icon: '🐃' },
+  { title: 'Great Migration', location: 'Maasai Mara · Wildlife', scene: 'scene-elephants', icon: '🦌' },
+  { title: 'African Fish Eagle', location: 'Birds', scene: 'scene-giraffe', icon: '🦅' },
+  { title: 'Lodge with Mountain View', location: 'Amboseli · Accommodation', scene: 'scene-kili', icon: '🏨' },
+  { title: 'Leopard in the Tree', location: 'Wildlife', scene: 'scene-lions', icon: '🐆' },
+  { title: 'Acacia at Golden Hour', location: 'Maasai Mara · Landscape', scene: 'scene-sunset', icon: '🌳' },
+  { title: 'Plains Zebra', location: 'Wildlife', scene: 'scene-giraffe', icon: '🦓' }
+];
+
+let currentIndex = 0;
+
+// Lightbox functions
+function openLightbox(index) {
+  currentIndex = index;
+  updateLightbox();
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function navigateLightbox(direction) {
+  currentIndex = (currentIndex + direction + galleryItems.length) % galleryItems.length;
+  updateLightbox();
+}
+
+function updateLightbox() {
+  const item = galleryItems[currentIndex];
+  document.getElementById('lightboxImg').innerHTML = `<div style="width:600px;height:400px;display:flex;align-items:center;justify-content:center;flex-direction:column;" class="${item.scene}"><div style="font-size:5rem;opacity:0.5;">${item.icon}</div><div style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;margin-top:1rem;opacity:0.5;">${item.title}</div></div>`;
+  document.getElementById('lightboxTitle').textContent = item.title;
+  document.getElementById('lightboxMeta').textContent = item.location;
+}
+
+// Filter functionality
+const filterBtns = document.querySelectorAll('.filter-btn');
+const galleryItems2 = document.querySelectorAll('.gallery-item');
+
+filterBtns.forEach(btn => {
+  btn.addEventListener('click', () => {
+    filterBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const filter = btn.dataset.filter;
+
+    galleryItems2.forEach(item => {
+      if (filter === 'all' || item.dataset.category === filter) {
+        item.style.display = '';
+      } else {
+        item.style.display = 'none';
+      }
+    });
+  });
+});
+
+// Keyboard navigation
+document.addEventListener('keydown', (e) => {
+  if (document.getElementById('lightbox').classList.contains('open')) {
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') navigateLightbox(-1);
+    if (e.key === 'ArrowRight') navigateLightbox(1);
+  }
+});
+
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

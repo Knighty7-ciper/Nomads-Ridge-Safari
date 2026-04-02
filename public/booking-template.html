@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Book Your Safari — Nomads Ridge Safaris</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --dust:  #f5ede0;
+  --clay:  #c8622a;
+  --ochre: #d4943a;
+  --bark:  #2c1a0e;
+  --dusk:  #1a1209;
+  --deep:  #0d0a04;
+  --sand:  #e8d5b0;
+  --sage:  #6b7c5c;
+  --mara-gold: #e8a020;
+  --mara-grass: #8a7a30;
+}
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  background: var(--deep);
+  color: var(--dust);
+  font-family: 'Outfit', sans-serif;
+  font-weight:300;
+  overflow-x:hidden;
+}
+
+/* ─── CINEMATIC HERO ─── */
+.hero {
+  position:relative; min-height:70vh;
+  display:flex; align-items:flex-end; overflow:hidden;
+}
+.hero-sky {
+  position:absolute; inset:0;
+  background:
+    radial-gradient(ellipse at 60% 30%, rgba(232,160,32,0.25) 0%, transparent 45%),
+    radial-gradient(ellipse at 30% 60%, rgba(200,98,42,0.15) 0%, transparent 40%),
+    linear-gradient(170deg, #3a2008 0%, #1a0e04 35%, #0d0804 60%, #0a0604 100%);
+}
+.hero-sun {
+  position:absolute; top:15%; right:25%;
+  width:200px; height:200px; border-radius:50%;
+  background:radial-gradient(circle, rgba(232,160,32,0.45) 0%, rgba(200,98,42,0.2) 40%, transparent 70%);
+  animation:sunPulse 4s ease-in-out infinite;
+}
+@keyframes sunPulse { 0%,100%{transform:scale(1);opacity:0.8} 50%{transform:scale(1.08);opacity:1} }
+
+.horizon-layer {
+  position:absolute; bottom:0; left:0; right:0; pointer-events:none;
+}
+
+.hero-content {
+  position:relative; z-index:2;
+  padding:4rem 5rem 6rem; width:100%;
+}
+.hero-breadcrumb {
+  font-size:0.65rem; letter-spacing:0.3em; text-transform:uppercase;
+  opacity:0.45; margin-bottom:1.5rem;
+  display:flex; align-items:center; gap:0.6rem;
+}
+.hero-breadcrumb span { color:var(--ochre); opacity:1; }
+.hero h1 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(3rem, 7vw, 6rem);
+  font-weight:300; line-height:1; margin-bottom:1rem;
+}
+.hero h1 em { font-style:italic; color:var(--ochre); }
+.hero p {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.25rem; font-style:italic; opacity:0.72;
+  max-width:600px; line-height:1.7;
+}
+
+/* ─── PACKAGES INTRO ─── */
+.intro { background:var(--dusk); padding:6rem 5rem; }
+.intro-inner { max-width:900px; margin:0 auto; text-align:center; }
+.intro h2 { margin-bottom:1.5rem; }
+.intro p { font-size:1.05rem; line-height:1.9; opacity:0.65; }
+
+/* ─── PACKAGE CARDS ─── */
+.packages { background:#100c06; padding:6rem 5rem; }
+.packages-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(340px, 1fr)); gap:2rem; margin-top:4rem; }
+.package-card {
+  background:rgba(26,18,9,0.7); border:1px solid rgba(245,237,224,0.07);
+  overflow:hidden; transition:border-color 0.4s, transform 0.4s;
+}
+.package-card:hover { border-color:rgba(200,98,42,0.4); transform:translateY(-5px); }
+.package-card.featured { border-color:rgba(200,98,42,0.4); background:rgba(200,98,42,0.05); }
+.package-header {
+  position:relative; height:180px; overflow:hidden;
+}
+.package-scene {
+  position:absolute; inset:0;
+  filter:brightness(0.5) saturate(1.2);
+}
+/* Different package backgrounds */
+.scene-mara .package-scene {
+  background:radial-gradient(ellipse at 50% 50%,rgba(232,160,32,0.4) 0%,transparent 60%),
+  linear-gradient(135deg,#1a0e04 0%,#3a2010 50%,#8a6010 100%);
+}
+.scene-amboseli .package-scene {
+  background:radial-gradient(ellipse at 50% 40%,rgba(74,124,156,0.4) 0%,transparent 60%),
+  linear-gradient(135deg,#0d1820 0%,#1a2a3a 50%,#2a3a4a 100%);
+}
+.scene-tsavo .package-scene {
+  background:radial-gradient(ellipse at 50% 50%,rgba(160,82,45,0.4) 0%,transparent 60%),
+  linear-gradient(135deg,#2a1008 0%,#4a2010 50%,#6a3010 100%);
+}
+.scene-naivasha .package-scene {
+  background:radial-gradient(ellipse at 50% 40%,rgba(45,106,106,0.4) 0%,transparent 60%),
+  linear-gradient(135deg,#0d1a1a 0%,#1a2a2a 50%,#2a3a3a 100%);
+}
+.scene-combo .package-scene {
+  background:radial-gradient(ellipse at 30% 40%,rgba(232,160,32,0.3) 0%,transparent 50%),
+  radial-gradient(ellipse at 70% 60%,rgba(74,124,156,0.3) 0%,transparent 50%),
+  linear-gradient(135deg,#1a0e04 0%,#1a1a0e 50%,#0e1a0e 100%);
+}
+.package-badge {
+  position:absolute; top:1rem; right:1rem;
+  background:rgba(13,10,4,0.85); border:1px solid rgba(200,98,42,0.4);
+  font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase;
+  color:var(--clay); padding:0.3rem 0.8rem;
+}
+.package-title-overlay {
+  position:absolute; bottom:1rem; left:1rem;
+}
+.package-title-overlay h3 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.8rem; font-weight:400; color:var(--dust);
+}
+.package-title-overlay .location {
+  font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase;
+  color:var(--mara-gold); opacity:0.9;
+}
+.package-body { padding:1.5rem; }
+.package-desc { font-size:0.85rem; opacity:0.6; line-height:1.7; margin-bottom:1.5rem; }
+.package-features { display:flex; flex-direction:column; gap:0.6rem; margin-bottom:1.5rem; }
+.package-feature {
+  display:flex; align-items:center; gap:0.7rem;
+  font-size:0.78rem; opacity:0.7;
+}
+.package-feature::before { content:'✓'; color:var(--clay); font-size:0.8rem; }
+.package-footer { display:flex; justify-content:space-between; align-items:center; padding-top:1rem; border-top:1px solid rgba(245,237,224,0.06); }
+.package-price { }
+.package-price-from { font-size:0.6rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.45; }
+.package-price-num { font-family:'Cormorant Garamond',serif; font-size:2rem; font-weight:300; color:var(--ochre); }
+.package-price-pp { font-size:0.65rem; opacity:0.4; }
+.package-btn {
+  background:var(--clay); color:var(--dust); text-decoration:none;
+  padding:0.7rem 1.5rem; font-size:0.7rem; letter-spacing:0.18em;
+  text-transform:uppercase; font-weight:500; transition:background 0.3s;
+}
+.package-btn:hover { background:var(--ochre); }
+
+/* ─── COMPARISON TABLE ─── */
+.comparison { background:var(--dusk); padding:6rem 5rem; }
+.comparison h2 { text-align:center; margin-bottom:1rem; }
+.comparison > p { text-align:center; opacity:0.6; margin-bottom:3rem; }
+.table-wrap { overflow-x:auto; margin-top:2rem; }
+table { width:100%; border-collapse:collapse; min-width:700px; }
+th, td { padding:1.2rem 1rem; text-align:left; border-bottom:1px solid rgba(245,237,224,0.06); }
+th { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; color:var(--ochre); }
+td { font-size:0.85rem; opacity:0.7; }
+td:first-child { font-weight:400; color:var(--dust); }
+tr:hover td { background:rgba(200,98,42,0.03); }
+.check { color:var(--clay); } .dash { opacity:0.3; }
+
+/* ─── BOOKING FORM ─── */
+.booking-section { background:#100c06; padding:6rem 5rem; }
+.booking-inner { max-width:800px; margin:0 auto; }
+.booking-section h2 { text-align:center; margin-bottom:0.5rem; }
+.booking-section > p { text-align:center; opacity:0.6; margin-bottom:3rem; }
+.booking-form {
+  background:rgba(26,18,9,0.8); border:1px solid rgba(245,237,224,0.08);
+  padding:3rem;
+}
+.form-section { margin-bottom:2.5rem; padding-bottom:2rem; border-bottom:1px solid rgba(245,237,224,0.06); }
+.form-section:last-child { border-bottom:none; margin-bottom:0; padding-bottom:0; }
+.form-section-title {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.3rem; font-weight:400; color:var(--ochre); margin-bottom:1.5rem;
+}
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+.form-row-3 { display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem; }
+.form-field { margin-bottom:1rem; }
+.form-label { font-size:0.65rem; letter-spacing:0.2em; text-transform:uppercase; opacity:0.5; margin-bottom:0.4rem; display:block; }
+.form-input, .form-select, .form-textarea {
+  width:100%; background:rgba(245,237,224,0.05); border:1px solid rgba(245,237,224,0.1);
+  padding:0.9rem 1rem; color:var(--dust); font-family:'Outfit',sans-serif;
+  font-size:0.88rem; outline:none; transition:border-color 0.3s;
+  -webkit-appearance:none;
+}
+.form-input::placeholder, .form-textarea::placeholder { opacity:0.3; }
+.form-input:focus, .form-select:focus, .form-textarea:focus { border-color:rgba(200,98,42,0.5); }
+.form-select option { background:#1a1209; color:var(--dust); }
+.form-textarea { min-height:120px; resize:vertical; }
+.form-checkbox-group { display:flex; flex-wrap:wrap; gap:1rem; }
+.form-checkbox { display:flex; align-items:center; gap:0.6rem; cursor:pointer; }
+.form-checkbox input { accent-color:var(--clay); width:18px; height:18px; }
+.form-checkbox span { font-size:0.82rem; opacity:0.7; }
+.form-submit-full {
+  width:100%; background:var(--clay); color:var(--dust); border:none; cursor:pointer;
+  padding:1.3rem; font-family:'Outfit',sans-serif; margin-top:1rem;
+  font-size:0.82rem; letter-spacing:0.22em; text-transform:uppercase; font-weight:500;
+  transition:background 0.3s;
+}
+.form-submit-full:hover { background:var(--ochre); }
+.form-note { font-size:0.7rem; opacity:0.4; text-align:center; margin-top:1rem; line-height:1.6; }
+
+/* ─── FAQ ─── */
+.faq { background:var(--dusk); padding:6rem 5rem; }
+.faq h2 { text-align:center; margin-bottom:3rem; }
+.faq-list { max-width:800px; margin:0 auto; }
+.faq-item { border-bottom:1px solid rgba(245,237,224,0.06); }
+.faq-question {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:1.5rem 0; cursor:pointer;
+}
+.faq-question h4 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:1.2rem; font-weight:400;
+}
+.faq-toggle { font-size:1.5rem; color:var(--ochre); transition:transform 0.3s; }
+.faq-item.open .faq-toggle { transform:rotate(45deg); }
+.faq-answer { max-height:0; overflow:hidden; transition:max-height 0.4s, padding 0.4s; }
+.faq-item.open .faq-answer { max-height:500px; padding-bottom:1.5rem; }
+.faq-answer p { font-size:0.88rem; opacity:0.65; line-height:1.8; }
+
+/* ─── TRUST BADGES ─── */
+.trust { background:#100c06; padding:4rem 5rem; }
+.trust-grid { display:flex; justify-content:center; flex-wrap:wrap; gap:3rem; }
+.trust-item { text-align:center; }
+.trust-icon { font-size:2rem; margin-bottom:0.8rem; }
+.trust-label { font-size:0.7rem; letter-spacing:0.15em; text-transform:uppercase; opacity:0.5; }
+
+/* ─── SHARED STYLES ─── */
+.section-tag {
+  font-size:0.65rem; letter-spacing:0.35em; text-transform:uppercase;
+  color:var(--clay); margin-bottom:0.9rem;
+  display:flex; align-items:center; justify-content:center; gap:0.7rem;
+}
+.section-tag::before, .section-tag::after { content:''; display:block; width:26px; height:1px; background:var(--clay); }
+h2 {
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(2.2rem,4vw,3.5rem);
+  font-weight:300; line-height:1.1; color:var(--dust);
+}
+h2 em { font-style:italic; color:var(--ochre); }
+
+/* ─── REVEAL ─── */
+.reveal { opacity:0; transform:translateY(28px); transition:opacity 0.9s ease, transform 0.9s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+.d1 { transition-delay:0.1s; } .d2 { transition-delay:0.22s; } .d3 { transition-delay:0.34s; }
+
+/* Mobile */
+@media(max-width:900px){
+  .hero-content, .intro, .packages, .comparison, .booking-section, .faq, .trust { padding:4rem 1.5rem; }
+  .hero { min-height:50vh; }
+  .packages-grid { grid-template-columns:1fr; }
+  .form-row-2, .form-row-3 { grid-template-columns:1fr; }
+  .booking-form { padding:2rem; }
+  .trust-grid { gap:2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+  <div class="hero-sky"></div>
+  <div class="hero-sun"></div>
+  <div class="horizon-layer">
+    <svg viewBox="0 0 1440 200" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="height:200px;width:100%">
+      <path fill="rgba(26,18,8,0.5)" d="M0,120 C120,100 200,60 340,50 C450,42 520,90 660,80 C780,72 860,30 1020,20 C1150,12 1240,55 1380,60 L1440,62 L1440,200 L0,200 Z"/>
+      <rect x="180" y="85" width="5" height="115" fill="#1a0e06"/>
+      <ellipse cx="182" cy="65" rx="65" ry="22" fill="#1a0e06" opacity="0.9"/>
+      <rect x="1100" y="100" width="4" height="100" fill="#1a0e06"/>
+      <ellipse cx="1102" cy="82" rx="50" ry="18" fill="#1a0e06" opacity="0.85"/>
+      <path fill="#0d0804" d="M0,160 C200,150 400,140 600,148 C800,156 1000,145 1200,150 C1320,154 1400,148 1440,146 L1440,200 L0,200 Z"/>
+    </svg>
+  </div>
+  <div class="hero-content">
+    <div class="hero-breadcrumb">Nomads Ridge Safaris <span>›</span> Book Your Safari</div>
+    <h1>Reserve Your <em>Safari</em></h1>
+    <p>"The hardest part is deciding to go. Everything else we handle."</p>
+  </div>
+</section>
+
+<!-- ═══ INTRO ═══ -->
+<div class="intro">
+  <div class="intro-inner reveal">
+    <div class="section-tag">How It Works</div>
+    <h2>Three steps to your <em>African adventure</em></h2>
+    <p style="margin-top:1.5rem;">Choose your dream safari below, fill in the enquiry form, and our safari consultants will contact you within 3 hours with availability, personalized recommendations, and everything you need to know before you go.</p>
+  </div>
+</div>
+
+<!-- ═══ PACKAGES ═══ -->
+<section class="packages">
+  <div class="section-tag reveal" style="justify-content:center">Safari Packages</div>
+  <h2 class="reveal d1" style="text-align:center">Find your perfect <em>safari</em></h2>
+
+  <div class="packages-grid">
+
+    <!-- Maasai Mara -->
+    <div class="package-card reveal">
+      <div class="package-header scene-mara">
+        <div class="package-scene"></div>
+        <div class="package-badge">Most Popular</div>
+        <div class="package-title-overlay">
+          <h3>Maasai Mara Classic</h3>
+          <div class="location">Kenya · 5 Days / 4 Nights</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">The definitive Kenyan safari experience. Watch the Great Migration, track the Big Five, and witness the drama of Africa's greatest wildlife spectacle.</p>
+        <div class="package-features">
+          <div class="package-feature">Luxury tented camp inside private conservancy</div>
+          <div class="package-feature">All meals & bush dinners</div>
+          <div class="package-feature">Private 4×4 game drives</div>
+          <div class="package-feature">Maasai cultural visit</div>
+          <div class="package-feature">Park fees included</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">From</div>
+            <div class="package-price-num">$2,100</div>
+            <div class="package-price-pp">per person</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Select</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Amboseli -->
+    <div class="package-card reveal d1">
+      <div class="package-header scene-amboseli">
+        <div class="package-scene"></div>
+        <div class="package-title-overlay">
+          <h3>Amboseli Express</h3>
+          <div class="location">Kenya · 3 Days / 2 Nights</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">Africa's most iconic view: elephants with Kilimanjaro as your backdrop. Compact, accessible, and breathtakingly beautiful.</p>
+        <div class="package-features">
+          <div class="package-feature">Luxury lodge with mountain views</div>
+          <div class="package-feature">All meals included</div>
+          <div class="package-feature">Morning & afternoon game drives</div>
+          <div class="package-feature">Observation Hill visit</div>
+          <div class="package-feature">Maasai cultural experience</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">From</div>
+            <div class="package-price-num">$1,650</div>
+            <div class="package-price-pp">per person</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Select</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tsavo -->
+    <div class="package-card reveal d2">
+      <div class="package-header scene-tsavo">
+        <div class="package-scene"></div>
+        <div class="package-title-overlay">
+          <h3>Tsavo Explorer</h3>
+          <div class="location">Kenya · 6 Days / 5 Nights</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">Kenya's largest park: red elephants, maneless lions, walkable lava flows, and Mzima Springs underwater viewing. Raw and untamed.</p>
+        <div class="package-features">
+          <div class="package-feature">Lodges in both East & West</div>
+          <div class="package-feature">Full board included</div>
+          <div class="package-feature">Mzima Springs walk</div>
+          <div class="package-feature">Shetani Lava Flow walk</div>
+          <div class="package-feature">Rhino tracking zones</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">From</div>
+            <div class="package-price-num">$1,850</div>
+            <div class="package-price-pp">per person</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Select</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Lake Naivasha -->
+    <div class="package-card reveal">
+      <div class="package-header scene-naivasha">
+        <div class="package-scene"></div>
+        <div class="package-title-overlay">
+          <h3>Lake Naivasha</h3>
+          <div class="location">Kenya · 3 Days / 2 Nights</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">Walk among giraffes on Crescent Island, sunset boat rides with hippos, and birdwatching in one of Africa's great wetlands.</p>
+        <div class="package-features">
+          <div class="package-feature">Lakeside lodge accommodation</div>
+          <div class="package-feature">Boat rides included</div>
+          <div class="package-feature">Crescent Island walking safari</div>
+          <div class="package-feature">Birdwatching walks</div>
+          <div class="package-feature">Hell's Gate or Longonot option</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">From</div>
+            <div class="package-price-num">$890</div>
+            <div class="package-price-pp">per person</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Select</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Combo Package -->
+    <div class="package-card featured reveal d1">
+      <div class="package-header scene-combo">
+        <div class="package-scene"></div>
+        <div class="package-badge">Best Value</div>
+        <div class="package-title-overlay">
+          <h3>Kenya Grand Safari</h3>
+          <div class="location">Kenya · 10 Days / 9 Nights</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">The complete Kenya experience: Amboseli, Lake Naivasha, and Maasai Mara in one extraordinary journey. All highlights, no compromises.</p>
+        <div class="package-features">
+          <div class="package-feature">All three premier destinations</div>
+          <div class="package-feature">Luxury accommodation throughout</div>
+          <div class="package-feature">All meals & park fees</div>
+          <div class="package-feature">Domestic flights between parks</div>
+          <div class="package-feature">Private guide for entire journey</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">From</div>
+            <div class="package-price-num">$4,800</div>
+            <div class="package-price-pp">per person</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Select</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Custom -->
+    <div class="package-card reveal d2">
+      <div class="package-header" style="background:linear-gradient(135deg,#1a1209 0%,#2a1a0e 100%); display:flex; align-items:center; justify-content:center;">
+        <div style="text-align:center;">
+          <div style="font-size:3rem; margin-bottom:1rem;">✈️</div>
+          <h3 style="font-family:'Cormorant Garamond',serif; font-size:1.5rem; font-weight:400;">Custom Safari</h3>
+          <div class="location" style="margin-top:0.5rem;">Tailored to You · Any Duration</div>
+        </div>
+      </div>
+      <div class="package-body">
+        <p class="package-desc">Build your perfect safari from scratch. Choose your destinations, duration, accommodation style, and activities. Our team creates your dream itinerary.</p>
+        <div class="package-features">
+          <div class="package-feature">Any Kenya or Tanzania destination</div>
+          <div class="package-feature">Budget to luxury options</div>
+          <div class="package-feature">Beach extensions available</div>
+          <div class="package-feature">Gorilla trekking add-ons</div>
+          <div class="package-feature">Fully personalized service</div>
+        </div>
+        <div class="package-footer">
+          <div class="package-price">
+            <div class="package-price-from">Price varies</div>
+            <div class="package-price-num">Custom</div>
+            <div class="package-price-pp">quote on request</div>
+          </div>
+          <a href="#booking-form" class="package-btn">Enquire</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ COMPARISON ═══ -->
+<section class="comparison">
+  <div class="section-tag reveal">Package Comparison</div>
+  <h2 class="reveal d1">What's included <em>in each package</em></h2>
+  <p class="reveal d2">Every Nomads Ridge package is all-inclusive. Here's exactly what's covered.</p>
+
+  <div class="table-wrap reveal d3">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature</th>
+          <th>Mara Classic</th>
+          <th>Amboseli</th>
+          <th>Tsavo</th>
+          <th>Naivasha</th>
+          <th>Grand Safari</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Accommodation</td>
+          <td>Tented Camp</td>
+          <td>Lodge</td>
+          <td>Lodges (×2)</td>
+          <td>Lakeside Lodge</td>
+          <td>All Premium</td>
+        </tr>
+        <tr>
+          <td>All Meals</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Private 4×4 Vehicle</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Expert Guide</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Park Entry Fees</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Game Drives</td>
+          <td>Unlimited</td>
+          <td>Morning + Afternoon</td>
+          <td>Full Days</td>
+          <td>Guided Walks</td>
+          <td>All Included</td>
+        </tr>
+        <tr>
+          <td>Boat Rides</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Cultural Visits</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Airport Transfers</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Domestic Flights</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+        </tr>
+        <tr>
+          <td>Balloon Safari</td>
+          <td class="check">✓</td>
+          <td class="check">✓</td>
+          <td class="dash">—</td>
+          <td class="dash">—</td>
+          <td class="check">✓</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ═══ BOOKING FORM ═══ -->
+<section class="booking-section" id="booking-form">
+  <div class="booking-inner">
+    <div class="section-tag reveal">Start Your Journey</div>
+    <h2 class="reveal d1">Send us your <em>enquiry</em></h2>
+    <p class="reveal d2">No payment required now. We'll respond within 3 hours.</p>
+
+    <form class="booking-form reveal" onsubmit="handleSubmit(event)">
+
+      <div class="form-section">
+        <div class="form-section-title">Which Safari?</div>
+        <div class="form-field">
+          <label class="form-label">Select Package</label>
+          <select class="form-select" name="package" required>
+            <option value="">Choose a package...</option>
+            <option value="mara">Maasai Mara Classic — 5 Days / 4 Nights ($2,100pp)</option>
+            <option value="amboseli">Amboseli Express — 3 Days / 2 Nights ($1,650pp)</option>
+            <option value="tsavo">Tsavo Explorer — 6 Days / 5 Nights ($1,850pp)</option>
+            <option value="naivasha">Lake Naivasha — 3 Days / 2 Nights ($890pp)</option>
+            <option value="grand">Kenya Grand Safari — 10 Days / 9 Nights ($4,800pp)</option>
+            <option value="custom">Custom Safari — Let me build it</option>
+          </select>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label">Preferred Travel Month</label>
+            <select class="form-select" name="month">
+              <option value="">Select month...</option>
+              <option>January 2026</option>
+              <option>February 2026</option>
+              <option>March 2026</option>
+              <option>April 2026</option>
+              <option>May 2026</option>
+              <option>June 2026</option>
+              <option>July 2026</option>
+              <option>August 2026</option>
+              <option>September 2026</option>
+              <option>October 2026</option>
+              <option>November 2026</option>
+              <option>December 2026</option>
+              <option>Flexible — any month</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Duration Preference</label>
+            <select class="form-select" name="duration">
+              <option value="">Select duration...</option>
+              <option>3 days</option>
+              <option>5 days</option>
+              <option>7 days</option>
+              <option>10+ days</option>
+              <option>Flexible</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Your Details</div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label">First Name *</label>
+            <input class="form-input" type="text" name="firstName" placeholder="Jane" required/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Last Name *</label>
+            <input class="form-input" type="text" name="lastName" placeholder="Kamau" required/>
+          </div>
+        </div>
+        <div class="form-row-2">
+          <div class="form-field">
+            <label class="form-label">Email Address *</label>
+            <input class="form-input" type="email" name="email" placeholder="jane@example.com" required/>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Phone / WhatsApp *</label>
+            <input class="form-input" type="tel" name="phone" placeholder="+254 700 000 000" required/>
+          </div>
+        </div>
+        <div class="form-field">
+          <label class="form-label">Country of Residence</label>
+          <input class="form-input" type="text" name="country" placeholder="Kenya, USA, UK..."/>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Your Group</div>
+        <div class="form-row-3">
+          <div class="form-field">
+            <label class="form-label">Adults (18+)</label>
+            <select class="form-select" name="adults">
+              <option>1</option>
+              <option selected>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+              <option>7+</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Children (under 18)</label>
+            <select class="form-select" name="children">
+              <option selected>0</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4+</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">Children's Ages</label>
+            <input class="form-input" type="text" name="childrenAges" placeholder="e.g., 5, 8, 12"/>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Your Interests</div>
+        <div class="form-checkbox-group">
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="big-five"/>
+            <span>Big Five Safari</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="migration"/>
+            <span>Great Migration</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="photography"/>
+            <span>Photography</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="birding"/>
+            <span>Birdwatching</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="culture"/>
+            <span>Cultural Experiences</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="adventure"/>
+            <span>Adventure Activities</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="honeymoon"/>
+            <span>Honeymoon / Romance</span>
+          </label>
+          <label class="form-checkbox">
+            <input type="checkbox" name="interests" value="family"/>
+            <span>Family with Kids</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-section">
+        <div class="form-section-title">Special Requirements</div>
+        <div class="form-field">
+          <label class="form-label">Dietary Requirements, Mobility, Special Requests</label>
+          <textarea class="form-textarea" name="requirements" placeholder="Please let us know about any dietary needs, mobility considerations, celebration occasions, or any other special requests..."></textarea>
+        </div>
+        <div class="form-field">
+          <label class="form-label">How did you hear about us?</label>
+          <select class="form-select" name="referral">
+            <option value="">Select...</option>
+            <option>Google search</option>
+            <option>TripAdvisor</option>
+            <option>Instagram / Social media</option>
+            <option>Word of mouth</option>
+            <option>Previous customer</option>
+            <option>Travel blog</option>
+            <option>Other</option>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit" class="form-submit-full">Send My Safari Enquiry — We Respond Within 3 Hours</button>
+      <p class="form-note">By submitting this form, you agree to be contacted by Nomads Ridge Safaris. No payment is required at this stage. We will send you a detailed quote and itinerary within 3 hours.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="faq">
+  <div class="section-tag reveal">Common Questions</div>
+  <h2 class="reveal d1">Things you <em>might wonder</em></h2>
+
+  <div class="faq-list">
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What's the booking process?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>1. Submit the enquiry form above with your preferred package and dates. 2. Our safari consultant contacts you within 3 hours with availability and a personalized quote. 3. If you're happy, we send a booking agreement and ask for a 20% deposit to hold your dates. 4. The balance is due 60 days before travel. That's it — we'll handle all the logistics from there.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What is your cancellation policy?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Full refund if cancelled 60+ days before travel. 50% refund if cancelled 30-59 days before. No refund if cancelled within 30 days, but we will work to rebook your dates or issue a credit for future travel. We strongly recommend purchasing comprehensive travel insurance at the time of booking.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>Are flights included?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>International flights to Nairobi are not included in our packages. However, all domestic flights within Kenya (such as Nairobi to Maasai Mara) are included in the Kenya Grand Safari package. For all other packages, we can arrange domestic flights at additional cost — just let us know when you enquire.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>What's the best time to visit Kenya?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>The Great Migration in the Maasai Mara peaks July–October. For Amboseli, June–October offers the clearest Kilimanjaro views. Lake Naivasha is excellent year-round. January–February is generally excellent across all parks with fewer crowds. The long rains (April–May) bring green landscapes but some road closures and lower prices.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>Do I need a visa for Kenya?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Most nationalities require a Kenya tourist visa (approx. $50 USD), available online at evisa.go.ke before arrival. Yellow fever vaccination is required if arriving from endemic countries. We recommend consulting your doctor about malaria prophylaxis for safari areas. Your consultant will provide a full travel preparation guide upon booking.</p>
+      </div>
+    </div>
+
+    <div class="faq-item reveal">
+      <div class="faq-question" onclick="toggleFaq(this)">
+        <h4>Is Kenya safe for families?</h4>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-answer">
+        <p>Absolutely. Thousands of families visit Kenya's safari parks every year. Our guides are trained in family safety, our vehicles are child-friendly, and our accommodation options range from family rooms to private camps. We can arrange childcare equipment, special meals, and age-appropriate activities for younger children.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TRUST BADGES ═══ -->
+<div class="trust">
+  <div class="trust-grid">
+    <div class="trust-item reveal">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-label">Secure Booking</div>
+    </div>
+    <div class="trust-item reveal d1">
+      <div class="trust-icon">💳</div>
+      <div class="trust-label">20% Deposit</div>
+    </div>
+    <div class="trust-item reveal d2">
+      <div class="trust-icon">✈️</div>
+      <div class="trust-label">Licensed Operator</div>
+    </div>
+    <div class="trust-item reveal d3">
+      <div class="trust-icon">⭐</div>
+      <div class="trust-label">4.9★ Rating</div>
+    </div>
+    <div class="trust-item reveal">
+      <div class="trust-icon">🌍</div>
+      <div class="trust-label">Conservation</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+reveals.forEach(el => obs.observe(el));
+
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.parentElement;
+  item.classList.toggle('open');
+}
+
+// Form submission (demo)
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('.form-submit-full');
+  btn.textContent = 'Enquiry Sent! We\'ll be in touch within 3 hours.';
+  btn.style.background = '#6b7c5c';
+  setTimeout(() => {
+    btn.textContent = 'Send My Safari Enquiry — We Respond Within 3 Hours';
+    btn.style.background = '';
+  }, 4000);
+  // In production, this would send to a backend
+}
+</script>
+</body>
+</html>

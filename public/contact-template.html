@@ -1,0 +1,830 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Nomads Ridge Safaris</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --dust: #e8e4df;
+      --clay: #c9a87c;
+      --ochre: #d4a853;
+      --bark: #8b5e3c;
+      --dusk: #1a1a1f;
+      --deep: #0d0d10;
+      --sand: #f5f0e8;
+      --sage: #7a8b6f;
+      --mist: rgba(232, 228, 223, 0.1);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      background: var(--dusk);
+      color: var(--dust);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    h1, h2, h3, h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 400;
+    }
+
+    /* Hero Section */
+    .hero {
+      position: relative;
+      height: 70vh;
+      min-height: 500px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, var(--deep) 0%, var(--dusk) 50%, #1f1a15 100%);
+    }
+
+    .hero-image-container {
+      position: absolute;
+      inset: 0;
+      opacity: 0.6;
+    }
+
+    .hero-image-container img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(13, 13, 16, 0.4) 0%,
+        rgba(26, 26, 31, 0.7) 50%,
+        var(--dusk) 100%
+      );
+    }
+
+    /* Safari Scene SVG */
+    .safari-scene {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 200px;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      text-align: center;
+      padding: 2rem;
+      max-width: 800px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      color: var(--ochre);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease forwards;
+    }
+
+    .hero-title {
+      font-size: clamp(3rem, 8vw, 5rem);
+      color: var(--sand);
+      margin-bottom: 1.5rem;
+      line-height: 1.1;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-subtitle {
+      font-size: 1.125rem;
+      color: var(--dust);
+      opacity: 0.8;
+      max-width: 600px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(20px);
+      animation: fadeUp 0.8s ease 0.4s forwards;
+    }
+
+    @keyframes fadeUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: 6rem 2rem;
+    }
+
+    .content-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    @media (max-width: 968px) {
+      .content-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+    }
+
+    /* Contact Info Section */
+    .contact-info {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .contact-info.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-tag {
+      color: var(--ochre);
+      font-size: 0.75rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      margin-bottom: 1rem;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      color: var(--sand);
+      margin-bottom: 1.5rem;
+      line-height: 1.2;
+    }
+
+    .section-desc {
+      color: var(--dust);
+      opacity: 0.7;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+      line-height: 1.8;
+    }
+
+    .contact-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .contact-card {
+      background: var(--mist);
+      border: 1px solid rgba(201, 168, 124, 0.2);
+      padding: 2rem;
+      display: flex;
+      gap: 1.5rem;
+      align-items: flex-start;
+      transition: all 0.3s ease;
+    }
+
+    .contact-card:hover {
+      border-color: rgba(201, 168, 124, 0.5);
+      background: rgba(201, 168, 124, 0.05);
+    }
+
+    .contact-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, var(--ochre), var(--bark));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .contact-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--dusk);
+    }
+
+    .contact-card-content h3 {
+      font-size: 1.25rem;
+      color: var(--sand);
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .contact-card-content p {
+      color: var(--dust);
+      opacity: 0.8;
+      font-size: 0.95rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .contact-card-content a {
+      color: var(--ochre);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .contact-card-content a:hover {
+      color: var(--clay);
+    }
+
+    .contact-card-content .highlight {
+      color: var(--ochre);
+      font-weight: 500;
+    }
+
+    /* Contact Form */
+    .contact-form-section {
+      background: linear-gradient(135deg, rgba(201, 168, 124, 0.08), rgba(139, 94, 60, 0.05));
+      border: 1px solid rgba(201, 168, 124, 0.2);
+      padding: 3rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.2s;
+    }
+
+    .contact-form-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .form-header {
+      margin-bottom: 2.5rem;
+    }
+
+    .form-header h3 {
+      font-size: 2rem;
+      color: var(--sand);
+      margin-bottom: 0.5rem;
+    }
+
+    .form-header p {
+      color: var(--dust);
+      opacity: 0.7;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .form-label {
+      display: block;
+      color: var(--dust);
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: rgba(26, 26, 31, 0.6);
+      border: 1px solid rgba(201, 168, 124, 0.3);
+      color: var(--sand);
+      font-family: 'Outfit', sans-serif;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus {
+      outline: none;
+      border-color: var(--ochre);
+      background: rgba(26, 26, 31, 0.8);
+    }
+
+    .form-input::placeholder,
+    .form-textarea::placeholder {
+      color: var(--dust);
+      opacity: 0.4;
+    }
+
+    .form-select {
+      cursor: pointer;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23c9a87c' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 1rem center;
+    }
+
+    .form-select option {
+      background: var(--dusk);
+      color: var(--sand);
+    }
+
+    .form-textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 1.25rem 2rem;
+      background: linear-gradient(135deg, var(--ochre), var(--bark));
+      border: none;
+      color: var(--dusk);
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(212, 168, 83, 0.3);
+    }
+
+    .submit-btn:active {
+      transform: translateY(0);
+    }
+
+    /* Map Section */
+    .map-section {
+      margin-top: 6rem;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease 0.4s;
+    }
+
+    .map-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .map-container {
+      background: var(--mist);
+      border: 1px solid rgba(201, 168, 124, 0.2);
+      padding: 2rem;
+    }
+
+    .map-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .map-header h3 {
+      font-size: 1.5rem;
+      color: var(--sand);
+    }
+
+    .office-badge {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--ochre);
+      font-size: 0.85rem;
+    }
+
+    .map-placeholder {
+      width: 100%;
+      height: 400px;
+      background: linear-gradient(135deg, rgba(26, 26, 31, 0.8), rgba(13, 13, 16, 0.9));
+      border: 1px solid rgba(201, 168, 124, 0.1);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .map-pin {
+      width: 60px;
+      height: 60px;
+      background: linear-gradient(135deg, var(--ochre), var(--bark));
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(-45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .map-pin svg {
+      width: 28px;
+      height: 28px;
+      fill: var(--dusk);
+      transform: rotate(45deg);
+    }
+
+    .map-placeholder p {
+      color: var(--dust);
+      opacity: 0.6;
+      font-size: 0.9rem;
+    }
+
+    /* Response Time Banner */
+    .response-banner {
+      background: linear-gradient(90deg, rgba(212, 168, 83, 0.1), rgba(139, 94, 60, 0.1));
+      border: 1px solid rgba(201, 168, 124, 0.3);
+      padding: 1.5rem 2rem;
+      margin-top: 3rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .response-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--ochre);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .response-icon svg {
+      width: 20px;
+      height: 20px;
+      fill: var(--dusk);
+    }
+
+    .response-text {
+      color: var(--dust);
+    }
+
+    .response-text strong {
+      color: var(--ochre);
+    }
+
+    /* Footer SVG */
+    .footer-scene {
+      margin-top: 4rem;
+      height: 120px;
+      position: relative;
+    }
+
+    /* Animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        height: 60vh;
+        min-height: 400px;
+      }
+
+      .main-content {
+        padding: 4rem 1.5rem;
+      }
+
+      .contact-form-section {
+        padding: 2rem;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-image-container">
+      <!-- Replace the src below with your actual contact page hero image -->
+      <img src="/contact-hero.jpg" alt="Nomads Ridge Safari Office" onerror="this.style.display='none'">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <!-- Safari Scene SVG -->
+    <svg class="safari-scene" viewBox="0 0 1440 200" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#0d0d10;stop-opacity:0"/>
+          <stop offset="100%" style="stop-color:#0d0d10;stop-opacity:1"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <path d="M0 140 Q360 120 720 140 T1440 130 L1440 200 L0 200 Z" fill="#1f1a15"/>
+      <!-- Acacia silhouettes -->
+      <g fill="#15151a">
+        <path d="M100 140 Q100 100 105 90 Q110 100 110 140 Z"/>
+        <ellipse cx="105" cy="85" rx="25" ry="12"/>
+        <path d="M350 140 Q350 110 353 100 Q356 110 356 140 Z"/>
+        <ellipse cx="353" cy="95" rx="18" ry="8"/>
+        <path d="M600 140 Q600 105 603 95 Q606 105 606 140 Z"/>
+        <ellipse cx="603" cy="90" rx="22" ry="10"/>
+        <path d="M1100 140 Q1100 108 1103 98 Q1106 108 1106 140 Z"/>
+        <ellipse cx="1103" cy="93" rx="20" ry="9"/>
+        <path d="M1350 140 Q1350 115 1353 105 Q1356 115 1356 140 Z"/>
+        <ellipse cx="1353" cy="100" rx="16" ry="7"/>
+      </g>
+      <!-- Distant hills -->
+      <path d="M0 150 Q200 130 400 145 T800 140 T1200 145 T1440 140 L1440 160 L0 160 Z" fill="#12121a" opacity="0.7"/>
+    </svg>
+
+    <div class="hero-content">
+      <span class="hero-tag">Get In Touch</span>
+      <h1 class="hero-title">Start Your Safari Journey</h1>
+      <p class="hero-subtitle">Our team of safari specialists is ready to help you plan the adventure of a lifetime across East Africa's most breathtaking landscapes.</p>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <section class="main-content">
+    <div class="content-grid">
+
+      <!-- Contact Information -->
+      <div class="contact-info reveal">
+        <span class="section-tag">Reach Out</span>
+        <h2 class="section-title">We're Here to Help</h2>
+        <p class="section-desc">
+          Whether you're planning your first safari or returning for another wild adventure, our dedicated team is available around the clock to assist you. Every journey begins with a conversation.
+        </p>
+
+        <div class="contact-cards">
+
+          <!-- Phone/WhatsApp -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02-.37-1.11-.56-2.3-.56-3.53 0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99 3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+              </svg>
+            </div>
+            <div class="contact-card-content">
+              <h3>Phone & WhatsApp</h3>
+              <p><a href="tel:+254714703892">+254 714 703 892</a></p>
+              <p class="highlight">Available 24/7</p>
+              <p>Chat on WhatsApp anytime</p>
+            </div>
+          </div>
+
+          <!-- Email -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+              </svg>
+            </div>
+            <div class="contact-card-content">
+              <h3>Email</h3>
+              <p><a href="/cdn-cgi/l/email-protection#08666765696c7b7a616c6f6d7b696e697a617b486f65696164266b6765"><span class="__cf_email__" data-cfemail="93fdfcfef2f7e0e1faf7f4f6e0f2f5f2e1fae0d3f4fef2faffbdf0fcfe">[email&#160;protected]</span></a></p>
+              <p class="highlight">We respond within 24 hours</p>
+              <p>For detailed inquiries and quotes</p>
+            </div>
+          </div>
+
+          <!-- Office Location -->
+          <div class="contact-card">
+            <div class="contact-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+              </svg>
+            </div>
+            <div class="contact-card-content">
+              <h3>Office Location</h3>
+              <p>Nomads Ridge Safaris</p>
+              <p>Nairobi, Kenya</p>
+              <p class="highlight">East Africa</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Response Banner -->
+        <div class="response-banner">
+          <div class="response-icon">
+            <svg viewBox="0 0 24 24">
+              <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+            </svg>
+          </div>
+          <p class="response-text">
+            <strong>Quick Response Guaranteed:</strong> We typically respond to inquiries within 2-4 hours during business hours, and within 24 hours for all other requests.
+          </p>
+        </div>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-section reveal">
+        <div class="form-header">
+          <h3>Send Us a Message</h3>
+          <p>Fill out the form below and we'll get back to you shortly.</p>
+        </div>
+
+        <form id="contactForm">
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">First Name</label>
+              <input type="text" class="form-input" placeholder="Your first name" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Last Name</label>
+              <input type="text" class="form-input" placeholder="Your last name" required>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-input" placeholder="your@email.com" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone Number</label>
+              <input type="tel" class="form-input" placeholder="+1 234 567 8900">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Interested In</label>
+            <select class="form-select">
+              <option value="">Select a safari package or topic</option>
+              <option value="maasai-mara">Maasai Mara Safari</option>
+              <option value="amboseli">Amboseli National Park</option>
+              <option value="tsavo">Tsavo National Parks</option>
+              <option value="lake-naivasha">Lake Naivasha</option>
+              <option value="gorilla">Mountain Gorilla Trek</option>
+              <option value="custom">Custom Safari</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Preferred Travel Dates</label>
+            <input type="text" class="form-input" placeholder="e.g., June 2026, specific dates TBD">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Your Message</label>
+            <textarea class="form-textarea" placeholder="Tell us about your dream safari - number of travelers, interests, special requirements, questions..."></textarea>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            Send Message
+          </button>
+        </form>
+      </div>
+
+    </div>
+
+    <!-- Map Section -->
+    <div class="map-section reveal">
+      <div class="map-container">
+        <div class="map-header">
+          <h3>Find Us</h3>
+          <div class="office-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            </svg>
+            Nairobi, Kenya Headquarters
+          </div>
+        </div>
+        <div class="map-placeholder">
+          <div class="map-pin">
+            <svg viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+            </svg>
+          </div>
+          <p>Nairobi, Kenya</p>
+          <p style="font-size: 0.8rem; opacity: 0.5;">Map integration available</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer Scene SVG -->
+  <div class="footer-scene">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" style="width: 100%; height: 100%;">
+      <defs>
+        <linearGradient id="footerGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#1a1a1f;stop-opacity:0"/>
+          <stop offset="100%" style="stop-color:#0d0d10;stop-opacity:1"/>
+        </linearGradient>
+      </defs>
+      <!-- Ground -->
+      <path d="M0 60 Q240 40 480 55 T960 50 T1440 55 L1440 120 L0 120 Z" fill="#0d0d10"/>
+      <!-- Grass tufts -->
+      <g stroke="#1f1a15" stroke-width="2" fill="none">
+        <path d="M100 65 Q105 50 100 35"/>
+        <path d="M105 65 Q110 45 115 30"/>
+        <path d="M400 60 Q405 48 400 38"/>
+        <path d="M800 58 Q805 42 800 28"/>
+        <path d="M1200 62 Q1205 50 1200 40"/>
+      </g>
+      <!-- Acacia -->
+      <g fill="#0a0a0f">
+        <path d="M720 55 Q720 30 723 20 Q726 30 726 55 Z"/>
+        <ellipse cx="723" cy="18" rx="35" ry="15"/>
+        <path d="M200 60 Q200 38 203 28 Q206 38 206 60 Z"/>
+        <ellipse cx="203" cy="25" rx="25" ry="10"/>
+        <path d="M1250 58 Q1250 35 1253 25 Q1256 35 1256 58 Z"/>
+        <ellipse cx="1253" cy="22" rx="30" ry="12"/>
+      </g>
+      <!-- Distant birds -->
+      <g fill="#1a1a1f">
+        <path d="M300 30 Q305 25 310 30 Q305 28 300 30"/>
+        <path d="M320 35 Q325 30 330 35 Q325 33 320 35"/>
+        <path d="M1100 25 Q1105 20 1110 25 Q1105 23 1100 25"/>
+      </g>
+    </svg>
+  </div>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    // Scroll reveal animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal, .contact-info, .contact-form-section, .map-section').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Form submission
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const btn = this.querySelector('.submit-btn');
+      const originalText = btn.textContent;
+
+      btn.textContent = 'Sending...';
+      btn.disabled = true;
+
+      // Simulate sending
+      setTimeout(() => {
+        btn.textContent = 'Message Sent!';
+        btn.style.background = 'linear-gradient(135deg, #7a8b6f, #5a6b4f)';
+
+        setTimeout(() => {
+          btn.textContent = originalText;
+          btn.disabled = false;
+          btn.style.background = '';
+          this.reset();
+        }, 2000);
+      }, 1500);
+    });
+  </script>
+
+</body>
+</html>
