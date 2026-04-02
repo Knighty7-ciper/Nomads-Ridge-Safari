@@ -2,12 +2,13 @@
 
 import Link from 'next/link'
 import { useState } from 'react'
+import { formatPrice } from '@/lib/currency'
 
 interface Package {
   id: string
   name: string
   duration: string
-  price: number
+  priceUSD: number
   description: string
   features: string[]
   isFeatured?: boolean
@@ -19,13 +20,13 @@ const defaultPackages: Package[] = [
     id: '1',
     name: 'Classic Safari',
     duration: '5 Days',
-    price: 2500,
+    priceUSD: 1200,
     description: 'Experience the iconic Maasai Mara with expert guides and comfortable lodges.',
     features: [
       'Daily game drives',
       'Professional guides',
       'All meals included',
-      'Basic accommodation',
+      'Comfortable accommodation',
       'Photography tips',
     ],
     isFeatured: false,
@@ -34,7 +35,7 @@ const defaultPackages: Package[] = [
     id: '2',
     name: 'Premium Explorer',
     duration: '7 Days',
-    price: 4500,
+    priceUSD: 1800,
     description: 'Multi-destination safari across Kenya and Tanzania with luxury camps.',
     features: [
       'Guided safari experiences',
@@ -50,8 +51,8 @@ const defaultPackages: Package[] = [
     id: '3',
     name: 'Gorilla Quest',
     duration: '10 Days',
-    price: 6200,
-    description: 'Ultimate African adventure including mountain gorilla trekking in Rwanda.',
+    priceUSD: 2500,
+    description: 'Ultimate African adventure including mountain gorilla trekking in Uganda.',
     features: [
       'Gorilla permits included',
       'Mountain trekking',
@@ -145,11 +146,12 @@ export default function PackagesPremium({
                 {/* Price */}
                 <div className="mb-6">
                   <p className="text-xs text-dust/60 uppercase tracking-wider mb-1">From</p>
-                  <div className="flex items-baseline gap-2">
-                    <span className="font-serif text-4xl font-light text-dust">
-                      ${pkg.price}
+                  <div className="flex flex-col gap-1">
+                    <span className="font-serif text-3xl font-light text-clay">
+                      {formatPrice(pkg.priceUSD, 'KES')}
                     </span>
-                    <span className="text-xs text-dust/60">per person</span>
+                    <span className="text-xs text-dust/60">per person (KES)</span>
+                    <span className="text-xs text-dust/50">${pkg.priceUSD} USD equivalent</span>
                   </div>
                 </div>
 

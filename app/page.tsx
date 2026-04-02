@@ -5,6 +5,7 @@ import Image from 'next/image'
 import ProcessSection from '@/components/sections/process-section'
 import TestimonialsPremium from '@/components/sections/testimonials-premium'
 import PackagesPremium from '@/components/sections/packages-premium'
+import DestinationsDynamic from '@/components/sections/destinations-dynamic'
 
 export default function Home() {
   return (
@@ -84,77 +85,8 @@ export default function Home() {
         </div>
       </section>
 
-      {/* DESTINATIONS SECTION */}
-      <section id="destinations" className="py-12 md:py-24 px-6 md:px-12 lg:px-20 bg-[#110c06]">
-        <p className="text-clay text-xs uppercase tracking-[0.35em] mb-4 flex items-center gap-4">
-          <span className="block w-8 h-px bg-clay"></span>
-          Where to Go
-        </p>
-        <h2 className="font-serif text-5xl font-light mb-4 text-dust">
-          Explore Kenya&apos;s Finest <em className="italic text-ochre">Destinations</em>
-        </h2>
-        
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
-          {/* Featured Large Card - First Item spans 2 rows */}
-          <div className="sm:row-span-2 relative overflow-hidden cursor-pointer group aspect-square sm:aspect-[3/4]">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg"
-              alt="Maasai Mara"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-50"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0602] to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-              <p className="text-ochre text-xs uppercase tracking-wider mb-2">Kenya</p>
-              <h3 className="font-serif text-2xl font-light text-dust mb-3">Maasai Mara</h3>
-              <p className="text-sand text-sm opacity-70 line-clamp-3">Experience the raw power of Africa&apos;s iconic wildlife in their natural habitat. The Great Migration is a sight to behold.</p>
-            </div>
-          </div>
-
-          {/* Small Cards - 2x2 grid */}
-          <div className="relative overflow-hidden cursor-pointer group aspect-square">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seregeti%20dawns-sna119zI11DkWOvBNKqR4QZ8jHqXLJ.jpg"
-              alt="Serengeti"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-50"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0602] to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-              <p className="text-ochre text-xs uppercase tracking-wider mb-1">Tanzania</p>
-              <h3 className="font-serif text-lg font-light text-dust">Serengeti</h3>
-            </div>
-          </div>
-
-          <div className="relative overflow-hidden cursor-pointer group aspect-square">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ngorongoro%20stars-0dp4SzAsFG1V4tukuLrrm3m2xxwuml.jpg"
-              alt="Ngorongoro"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-50"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0602] to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-              <p className="text-ochre text-xs uppercase tracking-wider mb-1">Tanzania</p>
-              <h3 className="font-serif text-lg font-light text-dust">Ngorongoro</h3>
-            </div>
-          </div>
-
-          <div className="relative overflow-hidden cursor-pointer group aspect-square">
-            <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rwanda%20canopy-xyGm95PrO7weFzo4UQ90Wl9Ifpkh1j.jpg"
-              alt="Bwindi"
-              fill
-              className="object-cover group-hover:scale-105 transition-transform duration-500 brightness-50"
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#0a0602] to-transparent"></div>
-            <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-              <p className="text-ochre text-xs uppercase tracking-wider mb-1">Uganda</p>
-              <h3 className="font-serif text-lg font-light text-dust">Bwindi</h3>
-            </div>
-          </div>
-        </div>
-      </section>
+      {/* DESTINATIONS SECTION - DYNAMIC WITH ANIMATIONS */}
+      <DestinationsDynamic />
 
       {/* EXPERIENCE SECTION */}
       <section className="py-12 md:py-24 px-6 md:px-12 lg:px-20 bg-dusk">
