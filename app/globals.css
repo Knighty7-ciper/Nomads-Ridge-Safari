@@ -179,11 +179,16 @@
 }
 
 .animate-fadeIn {
-  animation: fadeIn 0.8s ease-out forwards;
+  animation-name: fadeIn;
+  animation-duration: 0.8s;
+  animation-timing-function: ease-out;
+  animation-fill-mode: forwards;
 }
 
 .animate-bounce {
-  animation: bounce 2s infinite;
+  animation-name: bounce;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 /* Premium Testimonials & Packages Animations */
