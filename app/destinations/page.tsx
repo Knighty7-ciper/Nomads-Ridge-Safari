@@ -10,48 +10,32 @@ const destinations = [
     name: "Masai Mara",
     country: "Kenya",
     description: "Home to the Great Migration and the most abundant wildlife in Africa",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg",
+    image: "/images/mara-golden-sunset.jpg",
     highlight: "Great Migration",
   },
   {
     id: "2",
-    name: "Amboseli National Park",
+    name: "Lake Naivasha",
     country: "Kenya",
-    description: "Stunning views of Mount Kilimanjaro and large elephant populations",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Volcanoes%20NP%20Primates-ir40ZnRVNDoMVuodjZe5s51xxXNFsg.jpg",
-    highlight: "Kilimanjaro Views",
+    description: "A serene freshwater lake surrounded by lush vegetation and rich birdlife",
+    image: "/images/naivasha-lake-birds.jpg",
+    highlight: "Birdwatching Paradise",
   },
   {
     id: "3",
-    name: "Serengeti National Park",
-    country: "Tanzania",
-    description: "Endless plains supporting the world's largest mammal migration",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seregeti%20dawns-sna119zI11DkWOvBNKqR4QZ8jHqXLJ.jpg",
-    highlight: "2M Animal Migration",
+    name: "Amboseli National Park",
+    country: "Kenya",
+    description: "Stunning Mount Kilimanjaro backdrop with vast elephant herds",
+    image: "/images/amboseli-kilimanjaro.jpg",
+    highlight: "Kilimanjaro Views",
   },
   {
     id: "4",
-    name: "Ngorongoro Crater",
-    country: "Tanzania",
-    description: "A natural wonder with incredible biodiversity and volcanic beauty",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ngorongoro%20stars-0dp4SzAsFG1V4tukuLrrm3m2xxwuml.jpg",
-    highlight: "UNESCO World Heritage",
-  },
-  {
-    id: "5",
-    name: "Bwindi Impenetrable National Park",
-    country: "Uganda",
-    description: "Encounter endangered mountain gorillas in their natural habitat",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bwindi%20Forest-gIiVyTLcwtTU2YKTblAL44MGQOxM3y.jpg",
-    highlight: "Mountain Gorillas",
-  },
-  {
-    id: "6",
-    name: "Volcanoes National Park",
-    country: "Rwanda",
-    description: "Lush forests home to endangered mountain gorillas and stunning views",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rwanda%20canopy-xyGm95PrO7weFzo4UQ90Wl9Ifpkh1j.jpg",
-    highlight: "Gorilla Trekking",
+    name: "Tsavo National Park",
+    country: "Kenya",
+    description: "Kenya's largest park with rugged red earth and diverse wildlife",
+    image: "/images/tsavo-red-earth.jpg",
+    highlight: "Red Earth Wilderness",
   },
 ]
 
@@ -63,10 +47,10 @@ export default function DestinationsPage() {
         <div className="max-w-6xl mx-auto">
           <p className="text-ochre uppercase text-xs tracking-widest mb-3">EXPLORE</p>
           <h1 className="font-serif text-6xl font-light mb-6 text-balance">
-            African Safari Destinations
+            Kenyan Safari Destinations
           </h1>
           <p className="text-sand text-lg max-w-3xl leading-relaxed">
-            Discover the world's most iconic safari destinations across Kenya, Tanzania, Uganda, and Rwanda. Each location offers unique wildlife encounters, stunning landscapes, and unforgettable experiences designed for adventure seekers and nature lovers.
+            Discover Kenya's most iconic safari destinations. From the legendary Maasai Mara's Great Migration to the serene Lake Naivasha, the majestic elephant herds of Amboseli beneath Mount Kilimanjaro, and the raw wilderness of Tsavo. Each location offers unique wildlife encounters, stunning landscapes, and unforgettable experiences tailored for safari enthusiasts.
           </p>
         </div>
       </section>
