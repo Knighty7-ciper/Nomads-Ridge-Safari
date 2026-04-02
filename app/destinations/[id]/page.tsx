@@ -1,8 +1,15 @@
-'use client'
-
 import DestinationDetailTemplate from '@/components/sections/destination-detail-template'
 import Footer from '@/components/layout/footer'
 import { destinationsData } from '@/lib/destinations-data'
+
+export async function generateStaticParams() {
+  return [
+    { id: '1' },
+    { id: '2' },
+    { id: '3' },
+    { id: '4' },
+  ]
+}
 
 export default function DestinationDetail({ params }: { params: { id: string } }) {
   const destinationData = destinationsData[params.id]
