@@ -1,0 +1,187 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Nomads Ridge Safaris - New Design Palette */
+  --dust: #f5ede0;
+  --clay: #c8622a;
+  --ochre: #d4943a;
+  --bark: #2c1a0e;
+  --sage: #6b7c5c;
+  --dusk: #1a1209;
+  --sand: #e8d5b0;
+  --mist: rgba(245, 237, 224, 0.07);
+  
+  --background: #1a1209;
+  --foreground: #f5ede0;
+  --card: #2c1f15;
+  --card-foreground: #f5ede0;
+  --popover: #2c1f15;
+  --popover-foreground: #f5ede0;
+  --primary: #c8622a;
+  --primary-foreground: #1a1209;
+  --secondary: #d4943a;
+  --secondary-foreground: #1a1209;
+  --muted: #6b7c5c;
+  --muted-foreground: #e8d5b0;
+  --accent: #d4943a;
+  --accent-foreground: #1a1209;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #2c1a0e;
+  --input: #2c1f15;
+  --ring: #d4943a;
+  --chart-1: #c8622a;
+  --chart-2: #d4943a;
+  --chart-3: #6b7c5c;
+  --chart-4: #e8d5b0;
+  --chart-5: #f5ede0;
+  --radius: 0.5rem;
+  --sidebar: #2c1f15;
+  --sidebar-foreground: #f5ede0;
+  --sidebar-primary: #c8622a;
+  --sidebar-primary-foreground: #1a1209;
+  --sidebar-accent: #d4943a;
+  --sidebar-accent-foreground: #1a1209;
+  --sidebar-border: #2c1a0e;
+  --sidebar-ring: #d4943a;
+}
+
+.dark {
+  /* Dark mode uses the same palette */
+  --background: #1a1209;
+  --foreground: #f5ede0;
+  --card: #2c1a0e;
+  --card-foreground: #f5ede0;
+  --popover: #2c1a0e;
+  --popover-foreground: #f5ede0;
+  --primary: #c8622a;
+  --primary-foreground: #1a1209;
+  --secondary: #d4943a;
+  --secondary-foreground: #1a1209;
+  --muted: #6b7c5c;
+  --muted-foreground: #e8d5b0;
+  --accent: #d4943a;
+  --accent-foreground: #1a1209;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #2c1a0e;
+  --input: #2c1a0e;
+  --ring: #d4943a;
+  --chart-1: #c8622a;
+  --chart-2: #d4943a;
+  --chart-3: #6b7c5c;
+  --chart-4: #e8d5b0;
+  --chart-5: #f5ede0;
+  --sidebar: #2c1a0e;
+  --sidebar-foreground: #f5ede0;
+  --sidebar-primary: #c8622a;
+  --sidebar-primary-foreground: #1a1209;
+  --sidebar-accent: #d4943a;
+  --sidebar-accent-foreground: #1a1209;
+  --sidebar-border: #2c1a0e;
+  --sidebar-ring: #d4943a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --font-sans: var(--font-outfit);
+  --font-heading: var(--font-cormorant);
+  --font-serif: var(--font-cormorant);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+/* Nomads Ridge Safaris gradient - earthy tones */
+.text-gradient {
+  background: linear-gradient(135deg, #8b5c3c 0%, #c9874a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Safari-inspired gradient utility */
+.safari-gradient {
+  background: linear-gradient(135deg, #8b5c3c 0%, #c9874a 50%, #d4a574 100%);
+}
+
+.hero-overlay {
+  background: linear-gradient(135deg, rgba(139, 92, 60, 0.85) 0%, rgba(201, 135, 74, 0.7) 100%);
+}
+
+/* Hero Section Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}
