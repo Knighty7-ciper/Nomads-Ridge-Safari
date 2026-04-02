@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import Footer from "@/components/layout/footer"
+import FAQSection from "@/components/sections/faq-section"
 
 export default function About() {
   return (
@@ -154,6 +155,8 @@ export default function About() {
           </Link>
         </div>
       </div>
+      {/* FAQ SECTION */}
+      <FAQSection />
       <Footer />
     </main>
   )

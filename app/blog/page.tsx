@@ -1,56 +1,82 @@
 'use client'
 
 import Link from "next/link"
+import Image from "next/image"
 import Footer from "@/components/layout/footer"
+import { Eye, Heart, MessageCircle, ArrowRight } from "lucide-react"
 
 const articles = [
   {
     slug: "ultimate-maasai-mara-safari-guide",
-    title: "The Big Five: Masters of the African Savanna",
-    excerpt: "Discover the iconic lion, elephant, leopard, cape buffalo, and rhino. Learn their behavior, habitats, and how to spot them safely in the wild.",
-    date: "March 15, 2025",
-    category: "Wildlife",
-    readTime: "8 min read"
+    title: "All-Inclusive Kenya Safari Tours 2026/2027: Your Ultimate Guide",
+    excerpt: "Are you dreaming of an unforgettable wildlife adventure? All-inclusive Kenya safari tours are the perfect way to...",
+    date: "Mar 20, 2026",
+    category: "Safari Adventures",
+    readTime: "3 min read",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg",
+    views: 215,
+    likes: 42,
+    comments: 8
   },
   {
     slug: "best-time-kenya-tanzania",
-    title: "Best Time to Visit Kenya and Tanzania",
-    excerpt: "Plan your safari perfectly. We break down the seasons, migration patterns, and weather conditions for each destination to maximize wildlife sightings.",
-    date: "March 10, 2025",
+    title: "Kenya And Tanzania Safari Packages: Best Routes And Tips For 2026",
+    excerpt: "Africa made it to your travel list of 2026, so there is nothing like visiting Kenya and Tanzania in a smooth tour. A...",
+    date: "Mar 13, 2026",
     category: "Travel Planning",
-    readTime: "6 min read"
+    readTime: "5 min read",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seregeti%20dawns-sna119zI11DkWOvBNKqR4QZ8jHqXLJ.jpg",
+    views: 342,
+    likes: 68,
+    comments: 15
   },
   {
     slug: "maasai-culture-guide",
-    title: "Maasai Culture: Understanding Pastoral Traditions",
-    excerpt: "Immerse yourself in Maasai traditions, ceremonies, and community life. A deep dive into one of Africa's most fascinating and resilient cultures.",
-    date: "March 5, 2025",
+    title: "Comparing The Best Kenya Safari Tours Companies: Which One Fits Your Style?",
+    excerpt: "It is thrilling to plan a safari in Kenya, though it may be frustrating to have to select between the best Kenya safa...",
+    date: "Mar 13, 2026",
     category: "Culture",
-    readTime: "10 min read"
+    readTime: "6 min read",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ngorongoro%20stars-0dp4SzAsFG1V4tukuLrrm3m2xxwuml.jpg",
+    views: 279,
+    likes: 53,
+    comments: 12
   },
   {
     slug: "safari-photography-tips",
-    title: "Photography Tips for Safari Adventures",
-    excerpt: "Capture stunning wildlife moments with our comprehensive guide to camera settings, composition, lighting, and ethical wildlife photography practices.",
-    date: "February 28, 2025",
+    title: "The Wonders of Mount Kenya: A Guide to Kenya's Iconic Peak",
+    excerpt: "Mount Kenya, standing tall at 5,199 meters, is a beacon of natural beauty and adventure for trekkers and...",
+    date: "Mar 8, 2026",
     category: "Photography",
-    readTime: "7 min read"
+    readTime: "4 min read",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rwanda%20canopy-xyGm95PrO7weFzo4UQ90Wl9Ifpkh1j.jpg",
+    views: 156,
+    likes: 31,
+    comments: 6
   },
   {
     slug: "conservation-east-africa",
-    title: "Conservation Efforts in East African Protected Areas",
-    excerpt: "Learn about the organizations and initiatives working to protect Kenya's and Tanzania's most vulnerable ecosystems, species, and natural heritage.",
-    date: "February 20, 2025",
+    title: "Exploring the Masai Mara: Africa's Premier Wildlife Destination",
+    excerpt: "The Masai Mara National Reserve stands as one of the world's greatest natural wonders, a place where the circle of life...",
+    date: "Mar 1, 2026",
     category: "Conservation",
-    readTime: "9 min read"
+    readTime: "7 min read",
+    image: "https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=600&h=400&fit=crop",
+    views: 425,
+    likes: 89,
+    comments: 22
   },
   {
     slug: "safari-packing-guide",
-    title: "What to Pack for Your African Safari",
-    excerpt: "Essential gear, clothing, and travel items to ensure your comfort, safety, and readiness for every moment of your safari adventure.",
-    date: "February 15, 2025",
+    title: "Serengeti Safari: Experience the Majesty of Tanzania's Vast Plains",
+    excerpt: "The Serengeti, meaning 'the place where the land runs on forever' in the Maasai language, is a boundless ecosystem...",
+    date: "Feb 25, 2026",
     category: "Travel Tips",
-    readTime: "5 min read"
+    readTime: "5 min read",
+    image: "https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600&h=400&fit=crop",
+    views: 198,
+    likes: 40,
+    comments: 9
   }
 ]
 
@@ -70,23 +96,71 @@ export default function Blog() {
         <section className="mb-20">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
-              <article key={article.id} className="border border-clay/20 hover:border-clay/50 transition-all duration-300 group cursor-pointer">
-                <div className="h-40 bg-gradient-to-br from-clay/20 to-ochre/10 flex items-center justify-center overflow-hidden">
-                  <div className="text-center">
-                    <p className="text-ochre text-sm uppercase tracking-wider font-semibold">{article.category}</p>
-                  </div>
+              <article
+                key={article.slug}
+                className="border border-clay/30 hover:border-ochre/50 transition-all duration-300 group cursor-pointer overflow-hidden hover:shadow-xl bg-card"
+              >
+                {/* Image Container */}
+                <div className="relative h-48 overflow-hidden bg-clay/10">
+                  <Image
+                    src={article.image}
+                    alt={article.title}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-dusk/60 to-transparent"></div>
+                  {/* Category Badge */}
+                  <span className="absolute top-4 left-4 bg-ochre text-card text-xs font-bold uppercase tracking-wider px-3 py-1">
+                    {article.category}
+                  </span>
                 </div>
-                <div className="p-6">
-                  <p className="text-ochre text-xs uppercase tracking-wider mb-3 font-semibold">{article.date} · {article.readTime}</p>
-                  <h3 className="font-serif text-xl font-light mb-3 group-hover:text-ochre transition-colors">
+
+                {/* Content */}
+                <div className="p-6 flex flex-col h-full">
+                  {/* Metadata */}
+                  <div className="flex items-center gap-4 text-xs uppercase tracking-wider text-sand mb-4 pb-4 border-b border-clay/20">
+                    <span>
+                      <span className="text-ochre font-semibold">{article.date}</span>
+                    </span>
+                    <span className="flex-shrink-0">
+                      <span className="text-ochre font-semibold">{article.readTime}</span>
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="font-serif text-lg font-light text-dust mb-3 group-hover:text-ochre transition-colors leading-snug">
                     {article.title}
                   </h3>
-                  <p className="text-dust/70 text-sm leading-relaxed mb-4">
+
+                  {/* Excerpt */}
+                  <p className="text-dust/70 text-sm leading-relaxed mb-6 flex-grow">
                     {article.excerpt}
                   </p>
-                  <a href={`/blog/${article.slug}`} className="text-clay hover:text-ochre text-sm font-semibold uppercase tracking-wider transition-colors">
-                    Read More →
-                  </a>
+
+                  {/* Engagement Stats */}
+                  <div className="flex items-center gap-4 text-xs text-sand mb-6 pb-6 border-b border-clay/20">
+                    <div className="flex items-center gap-1.5">
+                      <Eye className="w-4 h-4 text-ochre/60" />
+                      <span>{article.views}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Heart className="w-4 h-4 text-ochre/60" />
+                      <span>{article.likes}</span>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <MessageCircle className="w-4 h-4 text-ochre/60" />
+                      <span>{article.comments}</span>
+                    </div>
+                  </div>
+
+                  {/* Read More Button */}
+                  <Link
+                    href={`/blog/${article.slug}`}
+                    className="inline-flex items-center gap-2 bg-ochre hover:bg-ochre/90 text-card font-semibold uppercase text-xs tracking-wider px-4 py-2.5 transition-colors w-full justify-center group/btn"
+                  >
+                    Read More
+                    <ArrowRight className="w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+                  </Link>
                 </div>
               </article>
             ))}

@@ -1,159 +1,144 @@
-"use client"
-
-import { useState, useEffect } from "react"
-import { MapPin, Search } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import Footer from "@/components/layout/footer"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import { MapPin, Compass } from "lucide-react"
 
-interface Destination {
-  id: string
-  name: string
-  description: string
-  location: string
-  image_url: string
-}
+const destinations = [
+  {
+    slug: "maasai-mara",
+    name: "Masai Mara",
+    country: "Kenya",
+    description: "Home to the Great Migration and the most abundant wildlife in Africa",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg",
+    highlight: "Great Migration",
+  },
+  {
+    slug: "amboseli",
+    name: "Amboseli National Park",
+    country: "Kenya",
+    description: "Stunning views of Mount Kilimanjaro and large elephant populations",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Volcanoes%20NP%20Primates-ir40ZnRVNDoMVuodjZe5s51xxXNFsg.jpg",
+    highlight: "Kilimanjaro Views",
+  },
+  {
+    slug: "serengeti",
+    name: "Serengeti National Park",
+    country: "Tanzania",
+    description: "Endless plains supporting the world's largest mammal migration",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/seregeti%20dawns-sna119zI11DkWOvBNKqR4QZ8jHqXLJ.jpg",
+    highlight: "2M Animal Migration",
+  },
+  {
+    slug: "ngorongoro",
+    name: "Ngorongoro Crater",
+    country: "Tanzania",
+    description: "A natural wonder with incredible biodiversity and volcanic beauty",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ngorongoro%20stars-0dp4SzAsFG1V4tukuLrrm3m2xxwuml.jpg",
+    highlight: "UNESCO World Heritage",
+  },
+  {
+    slug: "bwindi",
+    name: "Bwindi Impenetrable National Park",
+    country: "Uganda",
+    description: "Encounter endangered mountain gorillas in their natural habitat",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Bwindi%20Forest-gIiVyTLcwtTU2YKTblAL44MGQOxM3y.jpg",
+    highlight: "Mountain Gorillas",
+  },
+  {
+    slug: "volcanoes",
+    name: "Volcanoes National Park",
+    country: "Rwanda",
+    description: "Lush forests home to endangered mountain gorillas and stunning views",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/rwanda%20canopy-xyGm95PrO7weFzo4UQ90Wl9Ifpkh1j.jpg",
+    highlight: "Gorilla Trekking",
+  },
+]
 
 export default function DestinationsPage() {
-  const [destinations, setDestinations] = useState<Destination[]>([])
-  const [filteredDestinations, setFilteredDestinations] = useState<Destination[]>([])
-  const [searchTerm, setSearchTerm] = useState("")
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    const fetchDestinations = async () => {
-      try {
-        setLoading(true)
-        // Fetch from MySQL API
-        const response = await fetch("/api/destinations")
-        if (response.ok) {
-          const data = await response.json()
-          setDestinations(data.data || [])
-          setFilteredDestinations(data.data || [])
-        } else {
-          // No destinations yet
-          setDestinations([])
-          setFilteredDestinations([])
-        }
-      } catch (error) {
-        console.error("[v0] Error fetching destinations:", error)
-        setDestinations([])
-        setFilteredDestinations([])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    fetchDestinations()
-  }, [])
-
-  useEffect(() => {
-    let filtered = destinations
-
-    if (searchTerm) {
-      filtered = filtered.filter(
-        (dest) =>
-          dest.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          dest.location.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          dest.description.toLowerCase().includes(searchTerm.toLowerCase()),
-      )
-    }
-
-    setFilteredDestinations(filtered)
-  }, [searchTerm, destinations])
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-dusk text-dust">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-clay mx-auto"></div>
-            <p className="mt-4 text-sand">Loading destinations...</p>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
   return (
-    <div className="min-h-screen bg-dusk text-dust">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-5xl font-serif font-light mb-6 text-dust">Kenya&apos;s Finest Destinations</h1>
-          <p className="text-xl text-sand max-w-2xl mx-auto font-light">
-            Discover extraordinary experiences across Kenya's most captivating landscapes
+    <main className="min-h-screen bg-dusk text-dust">
+      {/* Header Section */}
+      <section className="pt-32 pb-20 px-6 lg:px-12">
+        <div className="max-w-6xl mx-auto">
+          <p className="text-ochre uppercase text-xs tracking-widest mb-3">EXPLORE</p>
+          <h1 className="font-serif text-6xl font-light mb-6 text-balance">
+            African Safari Destinations
+          </h1>
+          <p className="text-sand text-lg max-w-3xl leading-relaxed">
+            Discover the world's most iconic safari destinations across Kenya, Tanzania, Uganda, and Rwanda. Each location offers unique wildlife encounters, stunning landscapes, and unforgettable experiences designed for adventure seekers and nature lovers.
           </p>
         </div>
+      </section>
 
-        {/* Search */}
-        <div className="mb-12">
-          <div className="relative max-w-md mx-auto">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-ochre" />
-            <Input
-              placeholder="Search destinations..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-card border-clay/30 text-dust placeholder:text-sand/50"
-            />
-          </div>
-        </div>
-
-        {/* No Data State */}
-        {destinations.length === 0 && (
-          <div className="text-center py-20">
-            <p className="text-lg text-sand mb-6">No destinations yet. Coming soon...</p>
-            <p className="text-sm text-sage">Destinations will be managed through the admin dashboard</p>
-          </div>
-        )}
-
-        {/* Destinations Grid */}
-        {destinations.length > 0 && filteredDestinations.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-            {filteredDestinations.map((destination) => (
-              <Link key={destination.id} href={`/destinations/${destination.id}`}>
-                <div className="group cursor-pointer">
-                  <div className="relative h-64 mb-4 overflow-hidden rounded-sm">
+      {/* Featured Destinations Grid */}
+      <section className="px-6 lg:px-12 pb-20">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {destinations.map((dest) => (
+              <Link key={dest.slug} href={`/destinations/${dest.slug}`}>
+                <div className="group cursor-pointer h-full flex flex-col">
+                  {/* Image Container */}
+                  <div className="relative h-64 overflow-hidden bg-clay/10 mb-4">
                     <Image
-                      src={destination.image_url || "/placeholder.svg"}
-                      alt={destination.name}
+                      src={dest.image}
+                      alt={dest.name}
                       fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
                     />
+                    <div className="absolute inset-0 bg-gradient-to-t from-dusk via-transparent to-transparent"></div>
+                    
+                    {/* Highlight Badge */}
+                    <span className="absolute bottom-3 left-3 bg-ochre text-card text-xs font-bold uppercase tracking-wider px-3 py-1">
+                      {dest.highlight}
+                    </span>
                   </div>
-                  <div className="space-y-2">
-                    <h3 className="text-2xl font-serif font-light text-dust group-hover:text-ochre transition-colors">
-                      {destination.name}
-                    </h3>
-                    <div className="flex items-center gap-2 text-sand">
-                      <MapPin className="h-4 w-4 text-clay" />
-                      <span className="text-sm">{destination.location}</span>
+
+                  {/* Content */}
+                  <div className="flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 text-sand text-xs uppercase tracking-wider mb-3">
+                      <MapPin className="w-3 h-3 text-ochre" />
+                      <span>{dest.country}</span>
                     </div>
-                    <p className="text-sm text-sand line-clamp-2">{destination.description}</p>
+
+                    <h3 className="font-serif text-2xl font-light text-dust group-hover:text-ochre transition-colors mb-3">
+                      {dest.name}
+                    </h3>
+
+                    <p className="text-sand text-sm leading-relaxed mb-4 flex-grow">
+                      {dest.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 text-ochre font-semibold text-sm uppercase tracking-wider group-hover:gap-3 transition-all">
+                      <Compass className="w-4 h-4" />
+                      Explore Destination
+                    </div>
                   </div>
                 </div>
               </Link>
             ))}
           </div>
-        )}
+        </div>
+      </section>
 
-        {/* No Results State */}
-        {destinations.length > 0 && filteredDestinations.length === 0 && (
-          <div className="text-center py-12">
-            <p className="text-lg text-sand mb-4">No destinations match your search</p>
-            <Button
-              onClick={() => setSearchTerm("")}
-              className="bg-clay hover:bg-ochre text-dusk"
-            >
-              Clear Search
-            </Button>
-          </div>
-        )}
-      </div>
+      {/* CTA Section */}
+      <section className="bg-clay/10 border-y border-clay/30 py-16 px-6 lg:px-12 mb-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="font-serif text-4xl font-light text-dust mb-4">
+            Can't Choose? Let Us Help
+          </h2>
+          <p className="text-sand text-lg mb-8">
+            Our expert team can design the perfect multi-destination safari experience tailored to your interests and schedule.
+          </p>
+          <Link
+            href="/contact"
+            className="inline-block bg-ochre hover:bg-ochre/90 text-card font-semibold uppercase text-xs tracking-wider px-8 py-3 transition-colors"
+          >
+            Plan Your Custom Safari
+          </Link>
+        </div>
+      </section>
 
       <Footer />
-    </div>
+    </main>
   )
 }

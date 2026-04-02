@@ -7,6 +7,7 @@ import { Menu, Moon, Sun, User, ArrowUp } from "lucide-react"
 import Link from "next/link"
 import { useTheme } from "next-themes"
 import { useEffect } from "react"
+import { DestinationsDropdown } from "./destinations-dropdown"
 
 export function MainNavigation() {
   const [isOpen, setIsOpen] = useState(false)
@@ -61,11 +62,12 @@ export function MainNavigation() {
             {/* Desktop Navigation */}
             <div className="hidden lg:block">
               <div className="ml-10 flex items-baseline space-x-8">
-                {navLinks.map((link) => (
+                <DestinationsDropdown />
+                {navLinks.slice(1).map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-amber-900 dark:text-amber-100 hover:text-amber-700 dark:hover:text-amber-300 transition-colors text-sm font-medium px-3 py-2 rounded-md hover:bg-amber-100/60 dark:hover:bg-amber-900/30 backdrop-blur-sm"
+                    className="text-dust hover:text-ochre transition-colors text-sm font-medium px-3 py-2 rounded-md hover:bg-clay/5 backdrop-blur-sm"
                   >
                     {link.label}
                   </Link>

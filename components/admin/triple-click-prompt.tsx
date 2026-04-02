@@ -8,7 +8,8 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { AlertCircle } from "lucide-react"
 
-const INITIAL_PASSWORD = "Kesh09it7"
+const INITIAL_PASSWORD = "KESH09IT"
+const PET_NAME = "PUSSCATMINYUU"
 
 interface TripleClickPromptProps {
   children: React.ReactNode
@@ -64,23 +65,17 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
   }
 
   const handleEmailSubmit = async () => {
-    if (email !== "bknglabs.dev@gmail.com") {
-      setError("Invalid email address")
+    if (email !== PET_NAME) {
+      setError("Incorrect pet name")
       setEmail("")
       return
     }
 
-    // Password prompt for final verification
-    const adminPassword = prompt("Enter admin password:", "")
-    if (adminPassword === INITIAL_PASSWORD) {
-      localStorage.setItem("admin_token", "authenticated_" + Date.now())
-      localStorage.setItem("admin_email", email)
-      setShowPasswordPrompt(false)
-      setClickCount(0)
-      onAuthenticated()
-    } else {
-      setError("Invalid password")
-    }
+    localStorage.setItem("admin_token", "authenticated_" + Date.now())
+    localStorage.setItem("admin_email", "admin")
+    setShowPasswordPrompt(false)
+    setClickCount(0)
+    onAuthenticated()
   }
 
   useEffect(() => {
@@ -97,7 +92,7 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
         <DialogContent className="sm:max-w-md bg-white">
           <DialogHeader>
             <DialogTitle className="font-serif text-2xl">
-              {stage === "password" ? "Enter Password" : "Enter Email Address"}
+              {stage === "password" ? "Enter Password" : "Enter Pet Name"}
             </DialogTitle>
           </DialogHeader>
 
@@ -137,15 +132,15 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
               <>
                 <div>
                   <Label htmlFor="email-input" className="text-sm font-medium">
-                    Email Address
+                    Pet Name
                   </Label>
                   <Input
                     id="email-input"
-                    type="email"
+                    type="text"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     onKeyPress={(e) => e.key === "Enter" && handleEmailSubmit()}
-                    placeholder="Enter email"
+                    placeholder="Enter your pet name"
                     className="mt-2"
                   />
                 </div>
@@ -154,7 +149,7 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
                   disabled={!email}
                   className="w-full bg-amber-700 hover:bg-amber-800 text-white"
                 >
-                  Verify & Login
+                  Access Admin Panel
                 </Button>
               </>
             )}

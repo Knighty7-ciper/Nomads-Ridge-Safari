@@ -2,6 +2,8 @@
 
 import Footer from '@/components/layout/footer'
 import Image from 'next/image'
+import ProcessSection from '@/components/sections/process-section'
+import TestimonialsCarousel from '@/components/sections/testimonials-carousel'
 
 export default function Home() {
   return (
@@ -25,15 +27,15 @@ export default function Home() {
         <div className="absolute bottom-0 left-0 right-0 h-1/2 bg-gradient-to-t from-[#100a04] to-transparent"></div>
 
         {/* Hero content */}
-        <div className="relative z-10 max-w-2xl pl-20 pr-12">
+        <div className="relative z-10 max-w-2xl pl-6 sm:pl-12 md:pl-20 pr-6 sm:pr-12">
           <p className="text-ochre text-xs uppercase tracking-[0.35em] mb-6 flex items-center gap-4">
             <span className="block w-10 h-px bg-ochre"></span>
             Beyond Destinations
           </p>
-          <h1 className="font-serif text-6xl lg:text-7xl font-light leading-tight mb-6 text-dust">
-            Into The <em className="italic text-ochre">Wild</em>
+          <h1 className="font-serif text-6xl lg:text-7xl font-light leading-tight mb-6 text-clay drop-shadow-2xl">
+            Into The <em className="italic text-sand">Wild</em>
           </h1>
-          <p className="text-lg text-sand max-w-md mb-8 opacity-75">
+          <p className="text-sm sm:text-base md:text-lg text-sand max-w-md mb-8 opacity-75">
             From the Great Migration to intimate gorilla encounters, discover safari experiences crafted for adventurers and nature lovers alike.
           </p>
           <div className="flex gap-4">
@@ -47,7 +49,7 @@ export default function Home() {
         </div>
 
         {/* Stats - right side */}
-        <div className="absolute right-20 bottom-20 z-10 space-y-8 text-right">
+        <div className="absolute right-6 sm:right-12 md:right-20 bottom-20 z-10 space-y-8 text-right">
           <div>
             <div className="font-serif text-3xl text-clay">6+</div>
             <div className="text-xs uppercase tracking-wider opacity-50">Countries</div>
@@ -63,7 +65,7 @@ export default function Home() {
         </div>
 
         {/* Scroll hint */}
-        <div className="absolute bottom-8 left-20 z-10">
+        <div className="absolute bottom-8 left-6 sm:left-12 md:left-20 z-10">
           <p className="text-xs uppercase tracking-wider opacity-45 mb-3">Scroll to explore</p>
           <div className="w-px h-12 bg-gradient-to-b from-dust to-transparent animate-pulse"></div>
         </div>
@@ -91,9 +93,9 @@ export default function Home() {
           Explore Kenya&apos;s Finest <em className="italic text-ochre">Destinations</em>
         </h2>
         
-        <div className="grid grid-cols-3 gap-4 mt-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-12">
           {/* Featured Large Card - First Item spans 2 rows */}
-          <div className="row-span-2 relative overflow-hidden cursor-pointer group aspect-[3/4]">
+          <div className="sm:row-span-2 relative overflow-hidden cursor-pointer group aspect-square sm:aspect-[3/4]">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/lion%20country-MhAKVw2p8iOKDXDRZbQj97qQaR0QZH.jpg"
               alt="Maasai Mara"
@@ -216,6 +218,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* PROCESS SECTION */}
+      <ProcessSection />
+
+      {/* TESTIMONIALS SECTION */}
+      <TestimonialsCarousel />
 
       {/* CONTACT CTA */}
       <section id="contact" className="py-12 md:py-24 px-6 md:px-12 lg:px-20 bg-gradient-to-br from-[#0d0804] to-[#1a0e06] text-center">
