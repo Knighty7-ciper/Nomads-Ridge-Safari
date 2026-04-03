@@ -23,7 +23,7 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
     const updateValues = Object.values(data)
     const updateStr = updateKeys.map(k => `${k} = ?`).join(', ')
 
-    await connection.execute(`UPDATE destinations SET ${updateStr} WHERE id = ?`, [...updateValues, id])
+    await connection.query(`UPDATE destinations SET ${updateStr} WHERE id = ?`, [...updateValues, id])
     await connection.end()
 
     return new Response(JSON.stringify({ id, ...data }), { status: 200 })
