@@ -97,8 +97,8 @@ export default function MaasaiMaraPage() {
       {/* Why Section */}
       <section className="bg-[#100c06] py-28 px-12" id="about">
         <div className="max-w-screen-xl mx-auto grid grid-cols-2 gap-24 items-center">
-          <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#1a0e04] to-[#2d1a08]">
-            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_55%_35%,rgba(232,160,32,0.5),rgba(200,98,42,0.2),transparent_55%),linear-gradient(to_bottom,#1a3050,#0d0804_55%,#1a1008)]" />
+          <div className="relative aspect-[4/5] overflow-hidden bg-gradient-to-br from-[#1a0e04] to-[#2d1a08] bg-cover bg-center" style={{ backgroundImage: "url('/images/mara-big-five.jpg')" }}>
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/40 to-black/60" />
             <div className="absolute bottom-16 right-12 z-20 bg-dusk/88 border border-clay/40 p-5 backdrop-blur-sm text-center">
               <div className="font-serif text-4xl font-light text-ochre leading-none">Big 5</div>
               <div className="text-[0.6rem] tracking-[0.2em] uppercase opacity-50 mt-1">All in one reserve</div>
@@ -365,8 +365,8 @@ export default function MaasaiMaraPage() {
             Your home in <em className="text-ochre not-italic">the wild</em>
           </h2>
           <div className="grid grid-cols-[1.2fr_1fr] gap-20 items-start">
-            <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#1a1008] to-[#2d1a08] to-[#3a2010]">
-              <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_30%,rgba(232,160,32,0.25),transparent_55%)]" />
+            <div className="relative aspect-[4/3] overflow-hidden bg-gradient-to-br from-[#1a1008] to-[#2d1a08] to-[#3a2010] bg-cover bg-center" style={{ backgroundImage: "url('/images/mara-lodge-interior.jpg')" }}>
+              <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-black/30 to-black/50" />
               <div className="absolute top-8 right-8 z-20 bg-dusk/88 border border-clay/35 p-4 backdrop-blur-sm text-center">
                 <div className="text-[#e8a020] text-sm tracking-wider">★★★★</div>
                 <div className="text-[0.6rem] tracking-[0.15em] uppercase opacity-45 mt-1">Tented Camp</div>
