@@ -389,7 +389,7 @@ export default function BlogPost({ params }: { params: { slug: string } }) {
                 font-weight: 600;
               }
             `}</style>
-            {contentParts.map((part, idx) => {
+            {contentParts.map((part: string, idx: number) => {
               if (part.startsWith('##')) {
                 const title = part.replace(/^##\s*/, '')
                 return <h2 key={idx}>{title}</h2>
