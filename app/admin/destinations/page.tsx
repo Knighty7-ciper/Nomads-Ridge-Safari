@@ -108,12 +108,15 @@ export default function DestinationsPage() {
   if (loading) return <div className="p-6">Loading...</div>
 
   return (
-    <div className="p-6">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-dust">Manage Destinations</h1>
+    <div className="space-y-8">
+      <div className="flex justify-between items-center">
+        <div>
+          <h1 className="font-serif text-4xl font-light text-dust mb-2">Manage Destinations</h1>
+          <p className="text-sand">Add and edit safari destination pages</p>
+        </div>
         <Button
           onClick={() => setShowForm(!showForm)}
-          className="bg-amber-600 hover:bg-amber-700 text-white"
+          className="bg-ochre hover:bg-ochre/90 text-dusk font-semibold px-6 py-2"
         >
           <Plus className="w-4 h-4 mr-2" />
           Add Destination
@@ -121,44 +124,63 @@ export default function DestinationsPage() {
       </div>
 
       {showForm && (
-        <form onSubmit={handleSubmit} className="bg-white p-6 rounded-lg shadow-md mb-6">
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              placeholder="Destination Name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              required
-            />
-            <Input
-              placeholder="Country"
-              value={formData.country}
-              onChange={(e) => setFormData({ ...formData, country: e.target.value })}
-              required
-            />
-            <Input
-              placeholder="Image URL"
-              value={formData.image_url}
-              onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-              required
-            />
-            <Input
-              placeholder="Best Season"
-              value={formData.best_season}
-              onChange={(e) => setFormData({ ...formData, best_season: e.target.value })}
+        <form onSubmit={handleSubmit} className="bg-card border border-clay/30 p-8 rounded-lg space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-sm font-semibold text-dust mb-2">Destination Name</label>
+              <Input
+                placeholder="e.g., Maasai Mara"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="bg-dusk border-clay/30 text-dust placeholder:text-sand"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-dust mb-2">Country</label>
+              <Input
+                placeholder="e.g., Kenya"
+                value={formData.country}
+                onChange={(e) => setFormData({ ...formData, country: e.target.value })}
+                className="bg-dusk border-clay/30 text-dust placeholder:text-sand"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-dust mb-2">Image URL</label>
+              <Input
+                placeholder="https://..."
+                value={formData.image_url}
+                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                className="bg-dusk border-clay/30 text-dust placeholder:text-sand"
+                required
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-dust mb-2">Best Season</label>
+              <Input
+                placeholder="e.g., June to October"
+                value={formData.best_season}
+                onChange={(e) => setFormData({ ...formData, best_season: e.target.value })}
+                className="bg-dusk border-clay/30 text-dust placeholder:text-sand"
+                required
+              />
+            </div>
+          </div>
+          <div>
+            <label className="block text-sm font-semibold text-dust mb-2">Description</label>
+            <textarea
+              placeholder="Write a compelling description..."
+              value={formData.description}
+              onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+              className="w-full bg-dusk border border-clay/30 text-dust placeholder:text-sand rounded p-3 focus:outline-none focus:border-ochre"
+              rows={4}
               required
             />
           </div>
-          <textarea
-            placeholder="Description"
-            value={formData.description}
-            onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-            className="w-full mt-4 p-2 border rounded"
-            rows={4}
-            required
-          />
-          <div className="flex gap-2 mt-4">
-            <Button type="submit" className="bg-green-600 hover:bg-green-700 text-white">
-              {editingId ? 'Update' : 'Create'}
+          <div className="flex gap-3">
+            <Button type="submit" className="bg-ochre hover:bg-ochre/90 text-dusk font-semibold px-6">
+              {editingId ? 'Update Destination' : 'Create Destination'}
             </Button>
             <Button
               type="button"
@@ -167,7 +189,7 @@ export default function DestinationsPage() {
                 setEditingId(null)
                 setFormData({ name: '', country: '', description: '', image_url: '', best_season: '' })
               }}
-              className="bg-clay hover:bg-ochre text-dusk"
+              className="bg-clay/30 hover:bg-clay/50 text-dust"
             >
               Cancel
             </Button>
@@ -175,30 +197,43 @@ export default function DestinationsPage() {
         </form>
       )}
 
-      <div className="grid gap-4">
-        {destinations.map((destination) => (
-          <div key={destination.id} className="bg-white p-4 rounded-lg shadow-md flex justify-between items-center">
-            <div>
-              <h3 className="font-bold text-lg">{destination.name}</h3>
-              <p className="text-sand">{destination.country}</p>
-              <p className="text-sm text-sage">{destination.best_season}</p>
-            </div>
-            <div className="flex gap-2">
-              <Button
-                onClick={() => handleEdit(destination)}
-                className="bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                <Edit2 className="w-4 h-4" />
-              </Button>
-              <Button
-                onClick={() => handleDelete(destination.id)}
-                className="bg-red-600 hover:bg-red-700 text-white"
-              >
-                <Trash2 className="w-4 h-4" />
-              </Button>
-            </div>
+      <div className="space-y-3">
+        {destinations.length === 0 ? (
+          <div className="border border-clay/20 bg-clay/5 p-12 rounded-lg text-center">
+            <p className="text-sand">No destinations yet. Create one to get started.</p>
           </div>
-        ))}
+        ) : (
+          destinations.map((destination) => (
+            <div key={destination.id} className="bg-card border border-clay/30 p-6 rounded-lg hover:border-ochre/50 transition-all group">
+              <div className="flex justify-between items-start">
+                <div className="flex-1">
+                  <h3 className="font-semibold text-lg text-dust mb-2 group-hover:text-ochre transition-colors">{destination.name}</h3>
+                  <div className="space-y-1">
+                    <p className="text-sm text-sand">{destination.country}</p>
+                    <p className="text-xs text-sand/70">Best season: {destination.best_season}</p>
+                    <p className="text-xs text-sand/60 mt-2 line-clamp-2">{destination.description}</p>
+                  </div>
+                </div>
+                <div className="flex gap-2 ml-4">
+                  <Button
+                    onClick={() => handleEdit(destination)}
+                    className="bg-clay/40 hover:bg-ochre/30 text-dust transition-colors"
+                    size="sm"
+                  >
+                    <Edit2 className="w-4 h-4" />
+                  </Button>
+                  <Button
+                    onClick={() => handleDelete(destination.id)}
+                    className="bg-clay/40 hover:bg-red-900/30 text-dust transition-colors"
+                    size="sm"
+                  >
+                    <Trash2 className="w-4 h-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+          ))
+        )}
       </div>
     </div>
   )
