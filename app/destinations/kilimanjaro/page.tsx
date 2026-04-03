@@ -8,6 +8,11 @@ export default function KilimanjaroPage() {
 
       {/* Hero Section */}
       <section className="relative h-screen min-h-[700px] flex items-end overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/kilimanjaro-summit.jpg')" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#1a2a3a] via-[#0d1820] to-[#0d0a04]" />
 
         {/* Kilimanjaro peak */}

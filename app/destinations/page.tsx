@@ -233,8 +233,13 @@ export default function DestinationsPage() {
     <main className="min-h-screen bg-deep text-dust overflow-x-hidden">
       {/* Hero Section */}
       <section className="relative min-h-[85vh] flex items-center justify-center overflow-hidden">
-        {/* Background gradient */}
-        <div className="absolute inset-0 bg-gradient-to-b from-dusk via-dusk to-deep" />
+        {/* Background image with overlay */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/serengeti-plains.jpg')" }}
+        />
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/60" />
 
         {/* Safari Scene SVG */}
         <svg

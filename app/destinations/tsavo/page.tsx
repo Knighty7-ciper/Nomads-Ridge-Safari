@@ -8,6 +8,11 @@ export default function TsavoPage() {
 
       {/* Hero Section */}
       <section className="relative h-screen min-h-[700px] flex items-end overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/tsavo-red-earth.jpg')" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2a1808] via-[#1a0e04] to-[#0d0a04]" />
 
         {/* Sun glow */}

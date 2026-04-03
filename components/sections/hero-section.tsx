@@ -92,8 +92,8 @@ export function HeroSection({
         />
       )}
 
-      {/* Cinematic luxury overlay */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/55 to-black/75"></div>
+      {/* Solid brown overlay matching website primary color */}
+      <div className="absolute inset-0 bg-[#3a2008]"></div>
 
       {/* Hero Content - Centered for maximum impact */}
       <div className="relative z-10 w-full px-4 sm:px-6 lg:px-8 py-20">
