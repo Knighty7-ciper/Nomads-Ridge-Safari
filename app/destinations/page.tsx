@@ -87,14 +87,14 @@ const destinations = [
     name: "Samburu National Reserve",
     country: "Kenya",
     tagline: "Northern Kenya's rare species",
-    image: "/maasai-mara-safari.png",
+    image: "/images/samburu-reserve.jpg",
     highlight: "Grevy's Zebra",
     badge: "Specialty",
     price: "From $1,400",
     tags: ["Reticulated Giraffe"],
     description: "Discover the 'Special Five' - Grevy's zebra, reticulated giraffe, gerenuk, Beisa oryx, and Somali ostrich.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   },
   // Tanzania
   {
@@ -102,56 +102,56 @@ const destinations = [
     name: "Serengeti National Park",
     country: "Tanzania",
     tagline: "The endless plains",
-    image: "/maasai-mara-safari.png",
+    image: "/images/serengeti-plains.jpg",
     highlight: "Great Migration",
     badge: "UNESCO",
     price: "From $2,800",
     tags: ["Big Cat Capital", "Hot Air Balloon"],
     description: "Tanzania's crown jewel stretches endlessly with golden grasses. Witness the Great Migration's river crossings.",
     featured: true,
-    comingSoon: true
+    comingSoon: false
   },
   {
     id: "ngorongoro",
     name: "Ngorongoro Crater",
     country: "Tanzania",
     tagline: "Nature's amphitheater",
-    image: "/maasai-mara-safari.png",
+    image: "/images/ngorongoro-crater.jpg",
     highlight: "World's Largest Caldera",
     badge: "UNESCO",
     price: "From $2,200",
     tags: ["30,000+ Animals"],
     description: "A self-contained ecosystem where 30,000+ animals live in the world's largest inactive volcanic caldera.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   },
   {
     id: "kilimanjaro",
     name: "Mount Kilimanjaro",
     country: "Tanzania",
     tagline: "The roof of Africa",
-    image: "/maasai-mara-safari.png",
+    image: "/images/kilimanjaro-summit.jpg",
     highlight: "5,895m Summit",
     badge: "Adventure",
     price: "From $3,200",
     tags: ["7 Climatic Zones"],
     description: "Trek Africa's highest peak through five distinct climate zones from rainforest to glacial summit.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   },
   {
     id: "tarangire",
     name: "Tarangire National Park",
     country: "Tanzania",
     tagline: "Land of the giants",
-    image: "/maasai-mara-safari.png",
+    image: "/images/tarangire-elephants.jpg",
     highlight: "Elephant Concentrations",
     badge: "Elephant Paradise",
     price: "From $1,600",
     tags: ["Baobab Groves"],
     description: "During dry season, Tarangire hosts Tanzania's largest elephant herds gathering around the river.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   },
   // Uganda & Rwanda
   {
@@ -159,42 +159,42 @@ const destinations = [
     name: "Bwindi Impenetrable Forest",
     country: "Uganda",
     tagline: "Where giants roam",
-    image: "/maasai-mara-safari.png",
+    image: "/images/bwindi-forest.jpg",
     highlight: "Mountain Gorillas",
     badge: "UNESCO",
     price: "From $3,500",
     tags: ["Half of World's Gorillas"],
     description: "Trek through misty rainforest to encounter one of the world's most endangered species - mountain gorillas.",
     featured: true,
-    comingSoon: true
+    comingSoon: false
   },
   {
     id: "volcanoes",
     name: "Volcanoes National Park",
     country: "Rwanda",
     tagline: "Dian Fossey's legacy",
-    image: "/maasai-mara-safari.png",
+    image: "/images/volcanoes-park.jpg",
     highlight: "Golden Monkeys",
     badge: "Rwanda",
     price: "From $3,600",
     tags: ["Gorilla Treks"],
     description: "Rwanda's iconic volcanic park where Dian Fossey conducted her groundbreaking research.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   },
   {
     id: "kibale",
     name: "Kibale National Park",
     country: "Uganda",
     tagline: "Kingdom of primates",
-    image: "/maasai-mara-safari.png",
+    image: "/images/kibale-forest.jpg",
     highlight: "1,500 Chimpanzees",
     badge: "Chimp Capital",
     price: "From $1,800",
     tags: ["13 Primate Species"],
     description: "Home to the highest concentration of primates in Africa. Track chimpanzee communities.",
     featured: false,
-    comingSoon: true
+    comingSoon: false
   }
 ]
 
