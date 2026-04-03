@@ -17,8 +17,9 @@ export async function generateStaticParams() {
   ]
 }
 
-export default function DestinationDetail({ params }: { params: { id: string } }) {
-  const path = slugToPath[params.id]
+export default async function DestinationDetail({ params }: { params: Promise<{ id: string }> }) {
+  const { id } = await params
+  const path = slugToPath[id]
 
   if (path) {
     redirect(path)
