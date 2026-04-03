@@ -7,15 +7,15 @@ import { X, ChevronLeft, ChevronRight } from "lucide-react"
 const galleryImages = [
   {
     id: "1",
-    src: "/images/mara-golden-sunset.jpg",
-    alt: "Maasai Mara Golden Sunset",
-    category: "Landscapes",
-    title: "Mara Golden Hour",
+    src: "/maasai-mara-safari.png",
+    alt: "Maasai Mara Safari",
+    category: "Wildlife",
+    title: "Mara Safari Experience",
     location: "Maasai Mara, Kenya"
   },
   {
     id: "2",
-    src: "/images/amboseli-kilimanjaro.jpg",
+    src: "/amboseli-elephants-kilimanjaro.png",
     alt: "Elephants with Kilimanjaro",
     category: "Wildlife",
     title: "Elephants at Dusk",
@@ -23,38 +23,22 @@ const galleryImages = [
   },
   {
     id: "3",
-    src: "/images/tsavo-red-earth.jpg",
-    alt: "Tsavo Red Earth",
-    category: "Landscapes",
-    title: "Red Earth Wilderness",
-    location: "Tsavo, Kenya"
+    src: "/kenya-big-five.png",
+    alt: "Big Five Safari",
+    category: "Wildlife",
+    title: "The Big Five",
+    location: "Various Parks, Kenya"
   },
   {
     id: "4",
-    src: "/images/naivasha-lake-birds.jpg",
-    alt: "Lake Naivasha Birds",
-    category: "Birds",
-    title: "Avian Paradise",
-    location: "Lake Naivasha, Kenya"
-  },
-  {
-    id: "5",
-    src: "/maasai-mara-safari.png",
-    alt: "Safari Vehicle",
-    category: "Safari Life",
-    title: "The Safari Journey",
-    location: "Kenya"
-  },
-  {
-    id: "6",
     src: "/masai-village-cultural-experience.png",
-    alt: "Maasai Village",
+    alt: "Maasai Village Cultural Experience",
     category: "Culture",
     title: "Maasai Cultural Experience",
     location: "Maasai Mara, Kenya"
   },
   {
-    id: "7",
+    id: "5",
     src: "/kenyan-coast-dhow.png",
     alt: "Traditional Dhow",
     category: "Coast",
@@ -62,23 +46,15 @@ const galleryImages = [
     location: "Kenyan Coast"
   },
   {
-    id: "8",
-    src: "/kenya-big-five.png",
-    alt: "Big Five",
-    category: "Wildlife",
-    title: "The Big Five",
-    location: "Various Parks"
+    id: "6",
+    src: "/kenyan-beach-resort.png",
+    alt: "Beach Resort",
+    category: "Coast",
+    title: "Coastal Paradise",
+    location: "Diani Beach, Kenya"
   },
   {
-    id: "9",
-    src: "/mount-kenya-alpine-lakes.jpg",
-    alt: "Mount Kenya",
-    category: "Landscapes",
-    title: "Alpine Reflections",
-    location: "Mount Kenya"
-  },
-  {
-    id: "10",
+    id: "7",
     src: "/mount-kenya-hikers.png",
     alt: "Mountain Hikers",
     category: "Adventure",
@@ -86,24 +62,48 @@ const galleryImages = [
     location: "Mount Kenya"
   },
   {
+    id: "8",
+    src: "/mount-kenya-alpine-lakes.jpg",
+    alt: "Mount Kenya Alpine Lakes",
+    category: "Landscapes",
+    title: "Alpine Reflections",
+    location: "Mount Kenya"
+  },
+  {
+    id: "9",
+    src: "/diani-beach-kenya.png",
+    alt: "Diani Beach",
+    category: "Coast",
+    title: "Diani Beach Getaway",
+    location: "Diani Beach, Kenya"
+  },
+  {
+    id: "10",
+    src: "/boutique-hotel-karen-nairobi.png",
+    alt: "Boutique Hotel Karen",
+    category: "Safari Life",
+    title: "Luxury Safari Lodge",
+    location: "Karen, Nairobi"
+  },
+  {
     id: "11",
-    src: "/amboseli-elephants-kilimanjaro.png",
-    alt: "Elephants Kilimanjaro",
-    category: "Wildlife",
-    title: "Royal Herd",
-    location: "Amboseli, Kenya"
+    src: "/luxury-hotel-nairobi.png",
+    alt: "Luxury Hotel Nairobi",
+    category: "Safari Life",
+    title: "Nairobi Luxury Stay",
+    location: "Nairobi CBD"
   },
   {
     id: "12",
-    src: "/kenyan-beach-resort.png",
-    alt: "Beach Resort",
-    category: "Coast",
-    title: "Coastal Paradise",
-    location: "Diani Beach, Kenya"
+    src: "/nomads-ridge-hero-bg.jpg",
+    alt: "Safari Hero",
+    category: "Landscapes",
+    title: "Into The Wild",
+    location: "East Africa"
   }
 ]
 
-const categories = ["All", "Wildlife", "Landscapes", "Birds", "Culture", "Coast", "Adventure", "Safari Life"]
+const categories = ["All", "Wildlife", "Landscapes", "Culture", "Coast", "Adventure", "Safari Life"]
 
 export default function GalleryPage() {
   const [selectedCategory, setSelectedCategory] = useState("All")
@@ -167,6 +167,7 @@ export default function GalleryPage() {
       <section className="relative min-h-[50vh] flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-dusk via-dusk to-deep" />
 
+        {/* Safari Scene SVG */}
         <svg
           className="absolute bottom-0 left-0 right-0 h-40 w-full"
           viewBox="0 0 1440 160"
