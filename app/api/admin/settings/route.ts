@@ -64,13 +64,13 @@ export async function PUT(request: NextRequest) {
       // Update existing
       const updates = Object.entries(body).map(([key]) => `${key} = ?`).join(', ')
       const values = Object.values(body)
-      await connection.execute(`UPDATE site_settings SET ${updates}`, values)
+      await connection.query(`UPDATE site_settings SET ${updates}`, values)
     } else {
       // Insert new
       const columns = Object.keys(body).join(', ')
       const placeholders = Object.keys(body).map(() => '?').join(', ')
       const values = Object.values(body)
-      await connection.execute(`INSERT INTO site_settings (${columns}) VALUES (${placeholders})`, values)
+      await connection.query(`INSERT INTO site_settings (${columns}) VALUES (${placeholders})`, values)
     }
 
     await connection.end()

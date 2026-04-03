@@ -69,7 +69,7 @@ export async function PUT(request: NextRequest) {
     const updateValues = Object.values(updates)
     const updateStr = updateKeys.map(k => `${k} = ?`).join(', ')
 
-    await connection.execute(`UPDATE gallery SET ${updateStr} WHERE id = ?`, [...updateValues, id])
+    await connection.query(`UPDATE gallery SET ${updateStr} WHERE id = ?`, [...updateValues, id])
     await connection.end()
 
     return NextResponse.json({ data: { id, ...updates } })
