@@ -1,5 +1,4 @@
 "use client"
-
 import type React from "react"
 import { useState, useRef, useEffect } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
@@ -23,7 +22,9 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
   const [email, setEmail] = useState("")
   const [stage, setStage] = useState<"password" | "email">("password")
   const [error, setError] = useState("")
-  const clickTimerRef = useRef<NodeJS.Timeout>()
+
+  // FIXED: Proper typing for useRef with React 19 + TypeScript
+  const clickTimerRef = useRef<NodeJS.Timeout | null>(null)
 
   const handleClick = () => {
     setClickCount((prev) => {
@@ -35,14 +36,21 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
         setPassword("")
         setEmail("")
         setError("")
+
         setTimeout(() => {
           const input = document.getElementById("password-input") as HTMLInputElement
           input?.focus()
         }, 100)
+
         return 0
       }
 
-      if (clickTimerRef.current) clearTimeout(clickTimerRef.current)
+      // Clear previous timer
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current)
+      }
+
+      // Set new timer
       clickTimerRef.current = setTimeout(() => setClickCount(0), 500)
 
       return newCount
@@ -78,9 +86,12 @@ export function TripleClickPrompt({ children, onAuthenticated }: TripleClickProm
     onAuthenticated()
   }
 
+  // Cleanup timer on unmount
   useEffect(() => {
     return () => {
-      if (clickTimerRef.current) clearTimeout(clickTimerRef.current)
+      if (clickTimerRef.current) {
+        clearTimeout(clickTimerRef.current)
+      }
     }
   }, [])
 
