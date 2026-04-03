@@ -22,7 +22,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nomads%20logo%20fn_page-0001%20%281%29-BUlB2zoYoVP4J7bZV58xggVm64UgTP.jpg"
+            src="/logo.png"
             alt="Nomads Ridge Safaris"
             width={220}
             height={80}

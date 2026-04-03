@@ -8,6 +8,11 @@ export default function KibalePage() {
 
       {/* Hero Section */}
       <section className="relative h-screen min-h-[700px] flex items-end overflow-hidden">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('/images/kibale-forest.jpg')" }}
+        />
         <div className="absolute inset-0 bg-gradient-to-b from-[#0a1a08] via-[#0d1515] to-[#0d0a04]" />
 
         {/* Forest canopy */}
@@ -207,7 +212,7 @@ export default function KibalePage() {
               { emoji: "🐒", name: "Red Colobus", note: "Largest population in Uganda", check: "✓ Very common" },
               { emoji: "🐵", name: "Black & White Colobus", note: "Canopy acrobats", check: "✓ Very common" },
               { emoji: "🦧", name: "L'Hoest's Monkey", note: "Rare endemic species", check: "✓ Common" },
-              { emoji: "🐵", name: "Uganda Mangabey", note: "Endemic · forest dweller", check: "✓ Common" },
+              { emoji: "🐵", name: "Uganda Mangabey", note: "Endemic · forest dweller", check: "�� Common" },
               { emoji: "🦘", name: "Blue Monkey", note: "Mid-canopy dweller", check: "✓ Common" },
               { emoji: "🦝", name: "Baboon", note: "Forest edges", check: "✓ Occasional" },
               { emoji: "🌙", name: "Bush Baby (Galago)", note: "Nocturnal · elusive", check: "◆ Occasional" },
