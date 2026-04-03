@@ -150,9 +150,9 @@ export default function Company() {
         ref={setRef(0)}
         className="opacity-0 translate-y-8 transition-all duration-700 ease-out px-6 lg:px-20 max-w-7xl mx-auto -mt-16 relative z-20"
       >
-        <div className="bg-clay/5 border border-clay/20 p-12 md:p-16 rounded-sm flex items-center justify-center backdrop-blur-sm">
+        <div className="bg-dusk border border-clay/20 p-12 md:p-16 rounded-sm flex items-center justify-center">
           <Image
-            src="/logo.jpg"
+            src="/nomads-ridge-safari.jpg"
             alt="Nomads Ridge Safaris Logo"
             width={450}
             height={158}

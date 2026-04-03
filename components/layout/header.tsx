@@ -18,11 +18,11 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="flex items-center justify-between px-16 py-7 bg-gradient-to-b from-dusk/90 to-transparent backdrop-blur-sm max-sm:px-6">
+      <nav className="flex items-center justify-between px-16 py-7 bg-dusk max-sm:px-6">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/nomads%20logo%20fn_page-0001%20%281%29-BUlB2zoYoVP4J7bZV58xggVm64UgTP.jpg"
+            src="/nomads-ridge-safari.jpg"
             alt="Nomads Ridge Safaris"
             width={220}
             height={80}
