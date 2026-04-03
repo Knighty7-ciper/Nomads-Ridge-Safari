@@ -12,31 +12,33 @@ async function verifyAuth(request: Request) {
   return token?.startsWith('admin_token_')
 }
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     if (!await verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
 
+    const { id } = await params
     const data = await request.json()
     const connection = await mysql.createConnection(dbConfig)
     const updateKeys = Object.keys(data)
     const updateValues = Object.values(data)
     const updateStr = updateKeys.map(k => `${k} = ?`).join(', ')
 
-    await connection.execute(`UPDATE gallery SET ${updateStr} WHERE id = ?`, [...updateValues, params.id])
+    await connection.execute(`UPDATE gallery SET ${updateStr} WHERE id = ?`, [...updateValues, id])
     await connection.end()
 
-    return new Response(JSON.stringify({ id: params.id, ...data }), { status: 200 })
+    return new Response(JSON.stringify({ id, ...data }), { status: 200 })
   } catch (error) {
     return new Response('Internal Server Error', { status: 500 })
   }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
   try {
     if (!await verifyAuth(request)) return new Response('Unauthorized', { status: 401 })
 
+    const { id } = await params
     const connection = await mysql.createConnection(dbConfig)
-    await connection.execute('DELETE FROM gallery WHERE id = ?', [params.id])
+    await connection.execute('DELETE FROM gallery WHERE id = ?', [id])
     await connection.end()
 
     return new Response('Deleted successfully', { status: 200 })
