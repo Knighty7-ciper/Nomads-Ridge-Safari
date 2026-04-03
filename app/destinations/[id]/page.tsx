@@ -1,40 +1,28 @@
-import DestinationDetailTemplate from '@/components/sections/destination-detail-template'
-import Footer from '@/components/layout/footer'
-import { destinationsData } from '@/lib/destinations-data'
+import { redirect } from 'next/navigation'
+
+// Map slug IDs to their corresponding static page paths
+const slugToPath: { [key: string]: string } = {
+  'maasai-mara': '/destinations/maasai-mara',
+  'lake-naivasha': '/destinations/lake-naivasha',
+  'amboseli': '/destinations/amboseli',
+  'tsavo': '/destinations/tsavo',
+}
 
 export async function generateStaticParams() {
   return [
-    { id: '1' },
-    { id: '2' },
-    { id: '3' },
-    { id: '4' },
+    { id: 'maasai-mara' },
+    { id: 'lake-naivasha' },
+    { id: 'amboseli' },
+    { id: 'tsavo' },
   ]
 }
 
 export default function DestinationDetail({ params }: { params: { id: string } }) {
-  const destinationData = destinationsData[params.id]
+  const path = slugToPath[params.id]
 
-  if (!destinationData) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-deep">
-        <div className="text-center">
-          <h1 className="font-serif text-4xl font-light text-dust mb-4">Destination Not Found</h1>
-          <p className="text-dust/60 mb-8">Sorry, this destination page is still being prepared.</p>
-          <a
-            href="/destinations"
-            className="inline-block bg-clay text-dust px-8 py-3 uppercase text-sm font-medium tracking-wider hover:bg-ochre transition-colors"
-          >
-            Back to Destinations
-          </a>
-        </div>
-      </div>
-    )
+  if (path) {
+    redirect(path)
   }
 
-  return (
-    <>
-      <DestinationDetailTemplate data={destinationData} />
-      <Footer />
-    </>
-  )
+  redirect('/destinations')
 }
