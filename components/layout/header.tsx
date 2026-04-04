@@ -18,15 +18,15 @@ export default function Header() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50">
-      <nav className="flex items-center justify-between px-16 py-7 bg-gradient-to-b from-dusk/90 to-transparent backdrop-blur-sm max-sm:px-6">
+      <nav className="flex items-center justify-between px-4 sm:px-6 md:px-12 lg:px-16 py-4 sm:py-5 md:py-7 bg-gradient-to-b from-clay to-clay/80 backdrop-blur-sm">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <Image
-            src="/logo.png"
+            src="/logo.jpg"
             alt="Nomads Ridge Safaris"
             width={220}
             height={80}
-            className="h-16 w-auto"
+            className="h-10 sm:h-12 md:h-14 lg:h-16 w-auto"
             priority
           />
         </Link>
@@ -92,9 +92,9 @@ export default function Header() {
           aria-label="Toggle menu"
         >
           {isMobileMenuOpen ? (
-            <X className="w-6 h-6 text-dust" />
+            <X className="w-5 sm:w-6 h-5 sm:h-6 text-dust" />
           ) : (
-            <Menu className="w-6 h-6 text-dust" />
+            <Menu className="w-5 sm:w-6 h-5 sm:h-6 text-dust" />
           )}
         </button>
       </nav>
